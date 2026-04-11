@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PageSelectionWidget</class>
+ <widget class="QWidget" name="PageSelectionWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>482</width>
+    <height>369</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="tabPosition">
+      <enum>QTabWidget::TabPosition::South</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tabProfiles">
+      <attribute name="icon">
+       <iconset>
+        <normaloff>resources/img/looking.svg</normaloff>resources/img/looking.svg</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Profiles</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QWidget" name="profileControls" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="reloadProfiles">
+            <property name="toolTip">
+             <string>Refresh profile view</string>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset theme="view-refresh"/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="setLocation">
+            <property name="toolTip">
+             <string>Set location</string>
+            </property>
+            <property name="text">
+             <string>My location</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>resources/img/profile_ic_location.svg</normaloff>resources/img/profile_ic_location.svg</iconset>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="setExploreLocation">
+            <property name="toolTip">
+             <string>Explore different location</string>
+            </property>
+            <property name="text">
+             <string>Explore</string>
+            </property>
+            <property name="icon">
+             <iconset theme="globe"/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="setRightNow">
+            <property name="text">
+             <string>Now</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>resources/img/looking.svg</normaloff>resources/img/looking.svg</iconset>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="setFilter">
+            <property name="text">
+             <string>Filter</string>
+            </property>
+            <property name="icon">
+             <iconset theme="view-filter"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabFavorites">
+      <attribute name="icon">
+       <iconset>
+        <normaloff>resources/img/favorite.png</normaloff>resources/img/favorite.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Favorites</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2"/>
+     </widget>
+     <widget class="QWidget" name="tabChats">
+      <attribute name="icon">
+       <iconset>
+        <normaloff>resources/img/incoming_envelope.svg</normaloff>resources/img/incoming_envelope.svg</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Chats</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4"/>
+     </widget>
+     <widget class="QWidget" name="tabTaps">
+      <attribute name="icon">
+       <iconset>
+        <normaloff>resources/img/hot.svg</normaloff>resources/img/hot.svg</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Taps/Views</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QTabWidget" name="tabWidgetTaps">
+         <property name="tabPosition">
+          <enum>QTabWidget::TabPosition::South</enum>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="tabViewedBy">
+          <attribute name="title">
+           <string>👀Viewed by</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_6"/>
+         </widget>
+         <widget class="QWidget" name="tabTapsReceived">
+          <attribute name="title">
+           <string>📩Taps received</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_7"/>
+         </widget>
+         <widget class="QWidget" name="tabTapsSent">
+          <attribute name="title">
+           <string>📤Taps sent</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_8"/>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabAlbums">
+      <attribute name="icon">
+       <iconset>
+        <normaloff>resources/img/frame_with_picture.svg</normaloff>resources/img/frame_with_picture.svg</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Albums</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_9"/>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

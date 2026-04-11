@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/img/favorite.png</file>
+        <file>resources/img/no_favorite.png</file>
+        <file>resources/img/friendly.svg</file>
+        <file>resources/img/hot.svg</file>
+        <file>resources/img/looking.svg</file>
+    </qresource>
+</RCC>

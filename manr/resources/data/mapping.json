@@ -1,0 +1,16 @@
+{
+"genders": {"0": "-", "1": "Man", "2": "Woman", "3": "Non-Binary", "4": "Cis Man", "5": "Trans Man", "6": "Cis Woman", "7": "Trans Woman", "8": "Non-Conforming", "9": "Genderqueer", "10": "Agender", "11": "Androgynous", "12": "Bigender", "13": "Genderfluid", "14": "Questioning", "15": "Crossdresser", "16": "Queer", "17": "Pangender", "20": "Enby", "62": "Ask Me"},
+"ethnicity": {"1": "Asian", "2": "Black", "3": "Latino", "4": "Middle Eastern", "5": "Mixed", "6": "Native American", "7": "White", "8": "Other", "9": "South Asian"},
+"lookingFor": {"2": "Chat", "3": "Dates", "4": "Friends", "5": "Networking", "6": "Relationship", "7": "Hookups"},
+"meetAt": {"1": "My Place", "2": "Your Place", "3": "Bar", "4": "Coffee Shop", "5": "Restaurant"},
+"relationshipStatus": {"1": "Single", "2": "Dating", "3": "Exclusive", "4": "Committed", "5": "Partnered", "6": "Engaged", "7": "Married", "8": "Open Relationship"},
+"bodyType": {"1": "Toned (Wohlgeformt)", "2": "Average (Durchschnitt)", "3": "Large (Groß)", "4": "Muscular (Muskulös)", "5": "Slim (Schlank)", "6": "Stocky (Dünn)"},
+"sexualPosition": {"1": "Top", "2": "Bottom", "3": "Versatile", "4": "Vers Bottom", "5": "Vers Top", "6": "Side"},
+"sexualPositionIcon": {"1": "ic_ff_top.svg", "2": "ic_ff_bottom.svg", "3": "ic_ff_versatile.svg", "4": "ic_ff_vers_bottom.svg", "5": "ic_ff_vers_top.svg", "6": "ic_ff_side.svg"},
+"tribes": {"1": "Bear", "2": "Clean-Cut", "3": "Daddy", "4": "Discreet", "5": "Geek", "6": "Jock", "7": "Leather", "8": "Otter", "9": "Poz", "10": "Rugged", "11": "Trans", "12": "Twink", "13": "Sober"}, 
+"vaccines": {"1": "COVID-19", "2": "Monkeypox", "3": "Meningitis"},
+"acceptsNsfwPics": {"1": "Never", "2": "Not At First", "3": "Yes Please"},
+"hivStatus": {"1": "Negative", "2": "Negative, on PrEP", "3": "Positive", "4": "Positive, undetectable"},
+"sexualHealth": {"1": "Condoms", "2": "I'm on DoxyPEP", "3": "I'm on PrEP", "4": "I'm HIV undetectable", "5": "Prefer to discuss"},
+"pronouns": {"1": "He/Him/His"}
+}

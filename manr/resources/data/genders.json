@@ -1,0 +1,1072 @@
+[
+  {
+    "genderId": 0,
+    "gender": "-",
+    "displayGroup": 0,
+    "sortProfile": null,
+    "sortFilter": null,
+    "genderPlural": "-",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": null,
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 4,
+    "gender": "Cis Man",
+    "displayGroup": 1,
+    "sortProfile": null,
+    "sortFilter": null,
+    "genderPlural": "Cis Man",
+    "excludeOnProfileSelection": [
+      2,
+      5,
+      6,
+      7
+    ],
+    "excludeOnFilterSelection": [
+      1
+    ],
+    "alsoClassifiedAs": [
+      1
+    ]
+  },
+  {
+    "genderId": 1,
+    "gender": "Man",
+    "displayGroup": 1,
+    "sortProfile": null,
+    "sortFilter": null,
+    "genderPlural": "Men",
+    "excludeOnProfileSelection": [
+      2,
+      6,
+      7
+    ],
+    "excludeOnFilterSelection": [
+      4,
+      5,
+      19,
+      35,
+      45,
+      48,
+      54
+    ],
+    "alsoClassifiedAs": [
+      4,
+      5
+    ]
+  },
+  {
+    "genderId": 5,
+    "gender": "Trans Man",
+    "displayGroup": 1,
+    "sortProfile": null,
+    "sortFilter": 1,
+    "genderPlural": "Trans Men",
+    "excludeOnProfileSelection": [
+      2,
+      4,
+      6,
+      7
+    ],
+    "excludeOnFilterSelection": [
+      1,
+      19,
+      35,
+      45,
+      48,
+      54
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 6,
+    "gender": "Cis Woman",
+    "displayGroup": 1,
+    "sortProfile": null,
+    "sortFilter": null,
+    "genderPlural": "Cis Woman",
+    "excludeOnProfileSelection": [
+      1,
+      4,
+      5,
+      7
+    ],
+    "excludeOnFilterSelection": [
+      2
+    ],
+    "alsoClassifiedAs": [
+      2
+    ]
+  },
+  {
+    "genderId": 3,
+    "gender": "Non-Binary",
+    "displayGroup": 1,
+    "sortProfile": null,
+    "sortFilter": 10,
+    "genderPlural": "Non-Binary",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      25,
+      28,
+      29,
+      30,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      53,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61
+    ],
+    "alsoClassifiedAs": [
+      10,
+      41,
+      11,
+      38,
+      37,
+      42,
+      40,
+      53,
+      12,
+      39,
+      57,
+      15,
+      30,
+      29,
+      20,
+      58,
+      13,
+      9,
+      33,
+      25,
+      59,
+      8,
+      61,
+      17,
+      16,
+      34,
+      55,
+      60,
+      35,
+      18,
+      19,
+      32,
+      21,
+      28,
+      56
+    ]
+  },
+  {
+    "genderId": 7,
+    "gender": "Trans Woman",
+    "displayGroup": 1,
+    "sortProfile": null,
+    "sortFilter": 2,
+    "genderPlural": "Trans Women",
+    "excludeOnProfileSelection": [
+      1,
+      4,
+      5,
+      6
+    ],
+    "excludeOnFilterSelection": [
+      2,
+      18,
+      22,
+      23,
+      24,
+      26,
+      33,
+      34,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      46,
+      47,
+      50,
+      51,
+      52,
+      55,
+      58,
+      59,
+      60,
+      61
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 2,
+    "gender": "Woman",
+    "displayGroup": 1,
+    "sortProfile": null,
+    "sortFilter": null,
+    "genderPlural": "Women",
+    "excludeOnProfileSelection": [
+      1,
+      4,
+      5
+    ],
+    "excludeOnFilterSelection": [
+      6,
+      7,
+      18,
+      22,
+      23,
+      24,
+      26,
+      33,
+      34,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      46,
+      47,
+      50,
+      51,
+      52,
+      55,
+      58,
+      59,
+      60,
+      61
+    ],
+    "alsoClassifiedAs": [
+      6,
+      7
+    ]
+  },
+  {
+    "genderId": 10,
+    "gender": "Agender",
+    "displayGroup": 2,
+    "sortProfile": 1,
+    "sortFilter": 3,
+    "genderPlural": "Agender",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 11,
+    "gender": "Androgynous",
+    "displayGroup": 2,
+    "sortProfile": 2,
+    "sortFilter": 4,
+    "genderPlural": "Androgynous",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 62,
+    "gender": "Ask Me",
+    "displayGroup": 2,
+    "sortProfile": 16,
+    "sortFilter": null,
+    "genderPlural": "Ask Me",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": null,
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 12,
+    "gender": "Bigender",
+    "displayGroup": 2,
+    "sortProfile": 3,
+    "sortFilter": 6,
+    "genderPlural": "Bigender",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 15,
+    "gender": "Crossdresser",
+    "displayGroup": 2,
+    "sortProfile": 4,
+    "sortFilter": 5,
+    "genderPlural": "Crossdresser",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 20,
+    "gender": "Enby",
+    "displayGroup": 2,
+    "sortProfile": 5,
+    "sortFilter": 7,
+    "genderPlural": "Enby",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 13,
+    "gender": "Genderfluid",
+    "displayGroup": 2,
+    "sortProfile": 6,
+    "sortFilter": 8,
+    "genderPlural": "Genderfluid",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 9,
+    "gender": "Genderqueer",
+    "displayGroup": 2,
+    "sortProfile": 7,
+    "sortFilter": 9,
+    "genderPlural": "Genderqueer",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 8,
+    "gender": "Non-Conforming",
+    "displayGroup": 2,
+    "sortProfile": 8,
+    "sortFilter": 11,
+    "genderPlural": "Non-Conforming",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 17,
+    "gender": "Pangender",
+    "displayGroup": 2,
+    "sortProfile": 9,
+    "sortFilter": 12,
+    "genderPlural": "Pangender",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 16,
+    "gender": "Queer",
+    "displayGroup": 2,
+    "sortProfile": 10,
+    "sortFilter": 13,
+    "genderPlural": "Queer",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 14,
+    "gender": "Questioning",
+    "displayGroup": 2,
+    "sortProfile": 11,
+    "sortFilter": 14,
+    "genderPlural": "Questioning",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": null,
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 18,
+    "gender": "Transfeminine",
+    "displayGroup": 2,
+    "sortProfile": 12,
+    "sortFilter": 15,
+    "genderPlural": "Transfeminine",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      7
+    ]
+  },
+  {
+    "genderId": 19,
+    "gender": "Transmasculine",
+    "displayGroup": 2,
+    "sortProfile": 13,
+    "sortFilter": 16,
+    "genderPlural": "Transmasculine",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      1,
+      3,
+      5
+    ],
+    "alsoClassifiedAs": [
+      5
+    ]
+  },
+  {
+    "genderId": 41,
+    "gender": "Agi",
+    "displayGroup": 3,
+    "sortProfile": 14,
+    "sortFilter": 17,
+    "genderPlural": "Agi",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 43,
+    "gender": "Aravani",
+    "displayGroup": 3,
+    "sortProfile": 15,
+    "sortFilter": 18,
+    "genderPlural": "Aravani",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 38,
+    "gender": "Bading/Beki",
+    "displayGroup": 3,
+    "sortProfile": 17,
+    "sortFilter": 19,
+    "genderPlural": "Bading/Beki",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 37,
+    "gender": "Bakla",
+    "displayGroup": 3,
+    "sortProfile": 18,
+    "sortFilter": 20,
+    "genderPlural": "Bakla",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 42,
+    "gender": "Bantut",
+    "displayGroup": 3,
+    "sortProfile": 19,
+    "sortFilter": 21,
+    "genderPlural": "Bantut",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 40,
+    "gender": "Bayot",
+    "displayGroup": 3,
+    "sortProfile": 20,
+    "sortFilter": 22,
+    "genderPlural": "Bayot",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 53,
+    "gender": "Berbeza",
+    "displayGroup": 3,
+    "sortProfile": 21,
+    "sortFilter": 23,
+    "genderPlural": "Berbeza",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": [
+      16
+    ]
+  },
+  {
+    "genderId": 39,
+    "gender": "Binabae",
+    "displayGroup": 3,
+    "sortProfile": 22,
+    "sortFilter": 24,
+    "genderPlural": "Binabae",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 57,
+    "gender": "Buê đuê",
+    "displayGroup": 3,
+    "sortProfile": 23,
+    "sortFilter": 25,
+    "genderPlural": "Buê đuê",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 30,
+    "gender": "Demiman",
+    "displayGroup": 3,
+    "sortProfile": 24,
+    "sortFilter": 26,
+    "genderPlural": "Demiman",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 29,
+    "gender": "Demiwoman",
+    "displayGroup": 3,
+    "sortProfile": 25,
+    "sortFilter": 27,
+    "genderPlural": "Demiwoman",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 58,
+    "gender": "Enchaquirado",
+    "displayGroup": 3,
+    "sortProfile": 26,
+    "sortFilter": 28,
+    "genderPlural": "Enchaquirado",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 51,
+    "gender": "Feminiello",
+    "displayGroup": 3,
+    "sortProfile": 27,
+    "sortFilter": 29,
+    "genderPlural": "Feminiello",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 22,
+    "gender": "Hijra",
+    "displayGroup": 3,
+    "sortProfile": 28,
+    "sortFilter": 30,
+    "genderPlural": "Hijra",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 24,
+    "gender": "Jogappa",
+    "displayGroup": 3,
+    "sortProfile": 29,
+    "sortFilter": 31,
+    "genderPlural": "Jogappa",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 44,
+    "gender": "Jogtha",
+    "displayGroup": 3,
+    "sortProfile": 30,
+    "sortFilter": 32,
+    "genderPlural": "Jogtha",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 33,
+    "gender": "Kathoey",
+    "displayGroup": 3,
+    "sortProfile": 31,
+    "sortFilter": 33,
+    "genderPlural": "Kathoey",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 23,
+    "gender": "Kinner",
+    "displayGroup": 3,
+    "sortProfile": 32,
+    "sortFilter": 34,
+    "genderPlural": "Kinner",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 25,
+    "gender": "Kothi",
+    "displayGroup": 3,
+    "sortProfile": 33,
+    "sortFilter": 35,
+    "genderPlural": "Kothi",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 26,
+    "gender": "Mangalmukhi",
+    "displayGroup": 3,
+    "sortProfile": 34,
+    "sortFilter": 36,
+    "genderPlural": "Mangalmukhi",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 59,
+    "gender": "Muxe",
+    "displayGroup": 3,
+    "sortProfile": 35,
+    "sortFilter": 37,
+    "genderPlural": "Muxe",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 45,
+    "gender": "Nupa manba",
+    "displayGroup": 3,
+    "sortProfile": 36,
+    "sortFilter": 38,
+    "genderPlural": "Nupa manba",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      1,
+      5
+    ],
+    "alsoClassifiedAs": [
+      1,
+      5
+    ]
+  },
+  {
+    "genderId": 46,
+    "gender": "Nupi manbi",
+    "displayGroup": 3,
+    "sortProfile": 37,
+    "sortFilter": 39,
+    "genderPlural": "Nupi manbi",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 61,
+    "gender": "Omeguit",
+    "displayGroup": 3,
+    "sortProfile": 38,
+    "sortFilter": 40,
+    "genderPlural": "Omeguit",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 36,
+    "gender": "Phet Thi Sam",
+    "displayGroup": 3,
+    "sortProfile": 39,
+    "sortFilter": 41,
+    "genderPlural": "Phet Thi Sam",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": [
+      16
+    ]
+  },
+  {
+    "genderId": 34,
+    "gender": "Saaw Praphet Soong",
+    "displayGroup": 3,
+    "sortProfile": 40,
+    "sortFilter": 42,
+    "genderPlural": "Saaw Praphet Soong",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 55,
+    "gender": "Third Gender",
+    "displayGroup": 3,
+    "sortProfile": 41,
+    "sortFilter": 43,
+    "genderPlural": "Third Gender",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      7
+    ]
+  },
+  {
+    "genderId": 48,
+    "gender": "Thirunambi",
+    "displayGroup": 3,
+    "sortProfile": 43,
+    "sortFilter": 45,
+    "genderPlural": "Thirunambi",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      1,
+      5
+    ],
+    "alsoClassifiedAs": [
+      1,
+      5
+    ]
+  },
+  {
+    "genderId": 47,
+    "gender": "Thirunangai",
+    "displayGroup": 3,
+    "sortProfile": 42,
+    "sortFilter": 44,
+    "genderPlural": "Thirunangai",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 60,
+    "gender": "Tida Wena",
+    "displayGroup": 3,
+    "sortProfile": 44,
+    "sortFilter": 46,
+    "genderPlural": "Tida Wena",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      3,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 35,
+    "gender": "Tom",
+    "displayGroup": 3,
+    "sortProfile": 45,
+    "sortFilter": 47,
+    "genderPlural": "Tom",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      1,
+      3,
+      5
+    ],
+    "alsoClassifiedAs": [
+      1,
+      1
+    ]
+  },
+  {
+    "genderId": 54,
+    "gender": "Translaki",
+    "displayGroup": 3,
+    "sortProfile": 46,
+    "sortFilter": 48,
+    "genderPlural": "Translaki",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      1,
+      5
+    ],
+    "alsoClassifiedAs": [
+      1,
+      5
+    ]
+  },
+  {
+    "genderId": 52,
+    "gender": "Transnita",
+    "displayGroup": 3,
+    "sortProfile": 47,
+    "sortFilter": 49,
+    "genderPlural": "Transnita",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 32,
+    "gender": "Travesti",
+    "displayGroup": 3,
+    "sortProfile": 48,
+    "sortFilter": 50,
+    "genderPlural": "Travesti",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": [
+      15
+    ]
+  },
+  {
+    "genderId": 21,
+    "gender": "Two-Spirit",
+    "displayGroup": 3,
+    "sortProfile": 49,
+    "sortFilter": 51,
+    "genderPlural": "Two-Spirit",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 50,
+    "gender": "Waria",
+    "displayGroup": 3,
+    "sortProfile": 50,
+    "sortFilter": 52,
+    "genderPlural": "Waria",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      2,
+      7
+    ],
+    "alsoClassifiedAs": [
+      2,
+      7
+    ]
+  },
+  {
+    "genderId": 28,
+    "gender": "Weiniang",
+    "displayGroup": 3,
+    "sortProfile": 51,
+    "sortFilter": 53,
+    "genderPlural": "Weiniang",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  },
+  {
+    "genderId": 56,
+    "gender": "X Gender",
+    "displayGroup": 3,
+    "sortProfile": 52,
+    "sortFilter": 54,
+    "genderPlural": "X Gender",
+    "excludeOnProfileSelection": null,
+    "excludeOnFilterSelection": [
+      3
+    ],
+    "alsoClassifiedAs": []
+  }
+]

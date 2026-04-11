@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>map.html</file>
+        <file>leaflet/map.html</file>
+        <file>leaflet/leaflet.js</file>
+        <file>leaflet/leaflet.css</file>
+        <file>leaflet/images/marker-icon.png</file>
+        <file>leaflet/images/marker-icon-2x.png</file>
+        <file>leaflet/images/marker-shadow.png</file>
+        <file>leaflet/images/layers.png</file>
+        <file>leaflet/images/layers-2x.png</file>
+    </qresource>
+</RCC>

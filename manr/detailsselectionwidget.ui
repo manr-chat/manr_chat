@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DetailsSelectionWidget</class>
+ <widget class="QWidget" name="DetailsSelectionWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>369</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="tabPosition">
+      <enum>QTabWidget::TabPosition::South</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tabProfileDetails">
+      <attribute name="icon">
+       <iconset>
+        <normaloff>resources/img/looking.svg</normaloff>resources/img/looking.svg</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Profile Details</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2"/>
+     </widget>
+     <widget class="QWidget" name="tabChat">
+      <attribute name="icon">
+       <iconset>
+        <normaloff>resources/img/friendly.svg</normaloff>resources/img/friendly.svg</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Chat</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3"/>
+     </widget>
+     <widget class="QWidget" name="tabAlbum">
+      <attribute name="icon">
+       <iconset>
+        <normaloff>resources/img/frame_with_picture.svg</normaloff>resources/img/frame_with_picture.svg</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Album</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4"/>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

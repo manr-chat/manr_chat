@@ -1,0 +1,34 @@
+[
+  {
+    "pronounId": 0,
+    "pronoun": "-"
+  },
+  {
+    "pronounId": 1,
+    "pronoun": "He/Him/His"
+  },
+  {
+    "pronounId": 2,
+    "pronoun": "She/Her/Hers"
+  },
+  {
+    "pronounId": 3,
+    "pronoun": "They/Them/Theirs"
+  },
+  {
+    "pronounId": 4,
+    "pronoun": "Ze/Hir/Hirs"
+  },
+  {
+    "pronounId": 5,
+    "pronoun": "Ze/Zir/Zirs"
+  },
+  {
+    "pronounId": 6,
+    "pronoun": "Use My Name Only"
+  },
+  {
+    "pronounId": 7,
+    "pronoun": "Ask Me"
+  }
+]

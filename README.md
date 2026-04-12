@@ -2,7 +2,7 @@
 
 <img src="manr/resources/img/logo.png">
 
-MANR is an alternative chat client for the Grindr social network which aims to provide a better user experience. It is an unofficial client and in no way related to or endorsed by Grindr, Inc. The software is a reimplementation of the client side and contains no code from the official client.
+MANR (/ˈmɛnɐ/, from German word "Männer" for men) is an alternative chat client for the Grindr social network which aims to provide a better user experience. It is an unofficial client and in no way related to or endorsed by Grindr, Inc. The software is a reimplementation of the client side and contains no code from the official client.
 
 ## Installation
 

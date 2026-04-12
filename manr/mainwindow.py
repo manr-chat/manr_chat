@@ -371,7 +371,7 @@ class MainWindow:
 
     def initAll(self):
         pbegin = profile("initAll begin")
-        self.statusBar.updateLoginStatus(self.offlineMode)
+        self.statusBar.updateLoginStatus(self.offlineMode, True)
         if not self.model.user:
             return
         with override_cursor():
@@ -383,6 +383,7 @@ class MainWindow:
             self.initChats()
             self.initAlbums()
             self.setCounterLabels()
+        self.statusBar.updateLoginStatus(self.offlineMode, bool(self.websocket.receiver))
         profile("initAll end", start=pbegin)
 
     def initWebsocket(self):
@@ -398,7 +399,7 @@ class MainWindow:
                 self.model.setWebSocket(self.websocket)
                 self.websocket.runReceiverThread()
             except Exception as e:
-                print("Could not connect to websocket:", e)
+                print("ERROR: Could not connect to websocket:", e)
             finally:
                 profile("initWebsocket end", start=pbegin)
 

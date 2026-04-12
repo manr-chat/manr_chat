@@ -49,12 +49,14 @@ class StatusBarControl:
         line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.statusBar.addWidget(line)
 
-    def updateLoginStatus(self, offlineMode):
+    def updateLoginStatus(self, offlineMode, websocketConnected):
         if not self.model.user:
             status = "Not logged in."
         else:
             status = f"User {self.model.user.email} (ID: {self.model.user.profileId}) " + \
                      ("offline." if offlineMode else "logged in.")
+            if not offlineMode and not websocketConnected:
+                status += " ERROR: failed Websocket connection!"
         profile("Status:", status)
         self.statusLabel.setText(status)
 

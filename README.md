@@ -6,38 +6,67 @@ MANR (/ˈmɛnɐ/, from German word "Männer" for men) is an alternative chat cli
 
 ## Installation
 
-TODO
+Manual installation steps:
 
-Download repository, install Python and third party dependencies.
+1) Download and install [Python](https://www.python.org/downloads/), if you do not have it installed already. (If you are already using Python and know what you're doing, you may want to create a virtual environment.)
+2) Download the contents of this repository with the "Download ZIP" option and unzip it to where you want to save the application.
+3) Install Python dependencies: Open a terminal window in the directory where you unzipped the application files and run the following command:
+```
+pip install -r requirements.txt
+```
+4) Run the application by starting `app.py`.
+5) Optionally: create a shortcut to `app.py` to quickly start it. There's an app icon you can use in `./manr/resources/img/icon.ico`.
+
+TODO: Installer / Release artifacts 
+
+### Uninstall
+
+Simply delete the application folder. Additionally, delete settings and caches in `%APPDATA%/manr` and `%LOCALAPPDATA%/manr`.
+
+## Usage
+
+If you don't have a Grindr account already, use the official app first to create an account and set up your profile. Account creation is usually only done once and not yet implemented in MANR.
+
+On first use of MANR, you should see the login dialog. Here you can enter your account credentials, i.e. email address and password, to log in. Once an account is set up you can be logged in automatically the next time you start MANR. Toggle the "File -> Log in automatically" option to change that. You can manage multiple accounts and quickly log in using the "File -> Log in as" menu.
+
+**NOTE:** If you want to switch accounts, please restart the software. Logging in to another account while already logged in is possible but currently buggy.
+
+To display profiles nearby you, set up your location first. The down arrows near the "My location" and "Explore" buttons will show a popup menu listing all your saved locations and allow you to "Edit locations...". On first use, you need add your current location here, first.
+
+Choosing a location in the "My location" view actively sets your Grindr location and where you appear to other users. Choosing a location in the "Explore" view only changes which users close to that location are displayed to you.
+
+**WARNING:** Switching between different locations works fine and is intended for the "Explore" view. However, rapidly changing your own location by switching around in the "My location" view could be detected by Grindr as GPS spoofing / teleporting and may get your account flagged.
 
 ## Features
 
-As of now, MANR contains basic chat functionality which is most commonly used. Certain features are still missing, either because they are rarely used and thus not implemented yet, or because I consider them unnecesary.
+MANR contains most commonly used basic chat functionality, but certain features are still missing. Some featured are important but rarely used and thus not implemented yet, some I consider unnecesary.
 
 Features include:
 - Browse list of nearby user profiles, explore locations, and view "right now" profiles
-- Set location
+- Set current location, save list of favorite "explore" locations
 - View profile details of users
-- Chat with users
+- Chat with users, including pictures, location, reactions
 - View received albums
 - Upload pictures
-- Send taps
+- Send and receive taps
 - Add favorites, view list of favorites
-- View list of users you received taps from or sent taps to.
+- View list of users you received taps from, sent taps to, or who viewed your profile.
+- Search filters
 - Manage multiple user accounts
 
 Missing features:
-- Creating an account. Please use the official app to create an account and then enter your account credentials (email, password) into the login dialog
+- Creating an account. Please use the official app to create an account and fully set up your profile. Then enter your account credentials (email, password) into the login dialog.
 - Changing own user profile text / stats / profile picture.
 - Creating and sending albums. (Note: sending individual pictures is implemented)
 - Translations, including server provided translations for tags, genders, etc.
-- "Taken on Grindr" watermark
+- "Taken on Grindr" watermark (Planned)
+- Sending location (Planned)
 - Some other minor fields in the user profile
 - "For You" profiles and "Explore locations" in the user grid. These are stupid anyway and won't be implemented.
 
 ## License
 
-You may use this software under either the [CC0](https://creativecommons.org/public-domain/cc0/) license or the [Unlicense](LICENSE), per your choice.
+You may use this software under either the [CC0](https://creativecommons.org/public-domain/cc0/) license or the [Unlicense](LICENSE), per your choice. Basically, do whatever you want with it, as long as you respect third party IP.
 
 ### Third party code
 

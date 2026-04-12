@@ -646,7 +646,7 @@ def main(args=None):
     if args is None:
         args = sys.argv
     global app
-    QtWidgets.QApplication.setDesktopFileName("grindr_desktop")
+    QtWidgets.QApplication.setDesktopFileName("manr")
     app = QtWidgets.QApplication(sys.argv)
     #logging.basicConfig(
     #    format="%(asctime)s %(message)s",

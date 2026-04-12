@@ -144,7 +144,7 @@ def extension_from_headers(headers):
 def make_parent_dir(fname):
     Path(fname).parent.mkdir(parents=True, exist_ok=True)
 
-def download_img(mediaDesc: MediaDescription):
+def download_img(mediaDesc: MediaDescription) -> str | None:
     print("I: Downloading", mediaDesc.mediaType, ":", mediaDesc.name, time_str())
     headers_io = BytesIO()
     buffer_io = BytesIO()
@@ -177,7 +177,7 @@ def download_img(mediaDesc: MediaDescription):
         f.write(buffer_io.getvalue())
     return fname
 
-def get_cached_image_name(mediaDesc: MediaDescription):
+def get_cached_image_name(mediaDesc: MediaDescription) -> str | None:
     path = Path(mediaDesc.cacheName())
     files = list(path.parent.glob(path.stem + "*"))
     for f in files:
@@ -186,13 +186,13 @@ def get_cached_image_name(mediaDesc: MediaDescription):
             return str(f)
     return None
 
-def get_or_download_image(mediaDesc: MediaDescription):
+def get_or_download_image(mediaDesc: MediaDescription) -> str | None:
     imgName = get_cached_image_name(mediaDesc)
     if imgName:
         return imgName
     return download_img(mediaDesc)
 
-def get_or_download_full_media(mediaDesc: MediaDescription):
+def get_or_download_full_media(mediaDesc: MediaDescription) -> str | None:
     # If the video was expiring, we can only get the thumb or cover.
     # Check if the original video is in still cache
     mname = mediaDesc.name

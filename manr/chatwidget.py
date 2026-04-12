@@ -5,6 +5,7 @@ import math
 from dataclasses import dataclass
 from enum import Enum
 from html import escape
+from pathlib import Path
 from typing import Any, cast, assert_type
 
 from PySide6.QtCore import Qt, QAbstractListModel, QModelIndex, QObject, QSize, QRectF, QPointF, QTimer, QUrl
@@ -333,7 +334,8 @@ class ImagePopup(QDialog):
         self.setWindowTitle("Chat image [ESC to close]")
         if imgName and imgName.endswith(".gif"):
             curDir = os.getcwd()
-            file = f"{curDir}/{imgName}"
+            file = str(Path(curDir) / imgName)
+            file = QtCore.QUrl.fromLocalFile(file).toString()
             baseUrl = QUrl.fromLocalFile(curDir)
             webview = QWebEngineView()
             html = f'<img src="{file}"/><br><a href="{file}">{imgName}</a>'

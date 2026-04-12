@@ -8,6 +8,7 @@ from PySide6 import QtWidgets, QtGui, QtCore
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWebEngineWidgets import QWebEngineView
 
+from pathlib import Path
 from .image_cache import *
 
 docTemplate = """
@@ -36,20 +37,27 @@ class AlbumWidget(QtCore.QObject):
 
     def getAlbumHtml(self, album):
         curDir = os.getcwd()
+        def mediaFileName(mediaDesc):
+            fname = get_or_download_full_media(mediaDesc)
+            if not fname:
+                return ""
+            file = str(Path(curDir) / fname)
+            file = QtCore.QUrl.fromLocalFile(file).toString()
+            return file
         def imgElement(mediaDesc):
-            fname = get_or_download_full_media(mediaDesc)
-            file = f"{curDir}/{fname}"
-            return f'<img src="{file}"/><a href="{file}">{fname}</a>'
+            file = mediaFileName(mediaDesc)
+            return f'<img src="{file}"/><br><a href="{file}">{file}</a>'
         def videoElement(mediaDesc):
-            fname = get_or_download_full_media(mediaDesc)
-            file = f"{curDir}/{fname}"
-            return f'<video controls src="{file}"></video><a href="{file}">{fname}</a>'
+            file = mediaFileName(mediaDesc)
+            return f'<video controls src="{file}"></video><br><a href="{file}">{file}</a>'
         rows = []
         #print("Album size:", len(album["content"]))
         for i, media in enumerate(album["content"]):
             contentType = media["contentType"]
             url = media["url"] or media["thumbUrl"] or media["coverUrl"]
             imgHash = decorated_hash_from_url(url)
+            if not imgHash:
+                continue
             mediaDesc = MediaDescription(imgHash, MediaType.url, url=url)
             if contentType.startswith("image"):
                 element = imgElement(mediaDesc)
@@ -76,3 +84,6 @@ class AlbumWidget(QtCore.QObject):
         baseUrl = QtCore.QUrl.fromLocalFile(curDir)
         print(curDir, baseUrl)
         self.webview.setHtml(text, baseUrl=baseUrl)
+        # Write HTML to temp file for debugging purposes
+        with open(get_cache_dir() / "album_temp.html", "w") as f:
+            f.write(text)

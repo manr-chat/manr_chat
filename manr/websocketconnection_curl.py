@@ -4,19 +4,22 @@ import asyncio
 import traceback
 from curl_cffi.requests import AsyncSession
 from curl_cffi.const import CurlWsFlag
-from PySide6.QtCore import QObject, QThread, Signal, Slot
+from PySide6.QtCore import QObject, QRunnable, QThreadPool, Signal, Slot
 from .grindr_access.generic_request import default_headers
 
 wssUrl = "wss://grindr.mobi/v1/ws"
 
-
-class ReceiverWorker(QObject):
+class ReceiverThreadSignals(QObject):
     received = Signal(str)
     error = Signal(tuple)
     closed = Signal()
 
+class ReceiverWorker(QRunnable):
     def __init__(self):
         super().__init__()
+        self.signals = ReceiverThreadSignals()
+        self._url = None
+        self._headers = None
         self._ws = None
         self._loop = None
 
@@ -33,7 +36,7 @@ class ReceiverWorker(QObject):
         except Exception:
             traceback.print_exc()
             exctype, value = sys.exc_info()[:2]
-            self.error.emit((exctype, value, traceback.format_exc()))
+            self.signals.error.emit((exctype, value, traceback.format_exc()))
         finally:
             self._loop.close()
             self._loop = None
@@ -45,15 +48,15 @@ class ReceiverWorker(QObject):
                 self._ws = ws
                 try:
                     async for msg in ws:
-                        self.received.emit(msg.decode() if isinstance(msg, bytes) else msg)
+                        self.signals.received.emit(msg.decode() if isinstance(msg, bytes) else msg)
                 except Exception:
                     traceback.print_exc()
                     exctype, value = sys.exc_info()[:2]
-                    self.error.emit((exctype, value, traceback.format_exc()))
+                    self.signals.error.emit((exctype, value, traceback.format_exc()))
         finally:
             self._ws = None
             try:
-                self.closed.emit()
+                self.signals.closed.emit()
             except RuntimeError:
                 pass
 
@@ -66,12 +69,11 @@ class ReceiverWorker(QObject):
             asyncio.run_coroutine_threadsafe(self._ws.close(), self._loop)
 
 
-class WebSocketConnection(QObject):
+class WebSocketConnection():
     def __init__(self):
-        super().__init__()
         self.user = None
-        self._thread = None
         self._worker = ReceiverWorker()
+        self.receiverRunning = False
 
     def connect(self, user):
         self.user = user
@@ -79,22 +81,13 @@ class WebSocketConnection(QObject):
         self._initHeaders(self.user.deviceInfo, self.user.sessionId)
         headers = self.additional_headers
 
-        self._thread = QThread()
         self._worker.setConnection(wssUrl, headers)
-        self._worker.moveToThread(self._thread)
-
-        self._thread.started.connect(self._worker.run)
-        self._worker.closed.connect(self._thread.quit)
-
-        self._thread.start()
+        self.receiverRunning = True
+        QThreadPool.globalInstance().start(self._worker)
 
     def disconnect(self):
         self._worker.stop()
-        if self._thread is not None:
-            self._thread.quit()
-            self._thread.wait(5000)
-            self._worker.moveToThread(QThread.currentThread())  # move back to main thread
-        self._thread = None
+        self.receiverRunning = False
 
     def runReceiverThread(self):
         assert self.isConnected()
@@ -109,12 +102,8 @@ class WebSocketConnection(QObject):
         self.additional_headers = {p[0]: p[1] for e in headers if (p := e.split(": "))}
 
     @property
-    def signals(self) -> ReceiverWorker:
-        return self._worker
+    def signals(self) -> ReceiverThreadSignals:
+        return self._worker.signals
 
     def isConnected(self) -> bool:
-        return (
-            self._thread is not None
-            and self._thread.isRunning()
-            and self._worker._ws is not None
-        )
+        return self._worker._ws is not None

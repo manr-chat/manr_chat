@@ -19,6 +19,7 @@ class ReceiverThread(QRunnable):
     def __init__(self):
         super().__init__()
         self.signals = ReceiverThreadSignals()
+        self.connection = None
 
     def setConnection(self, connection):
         self.connection = connection
@@ -77,12 +78,11 @@ class WebSocketConnection():
     def _initHeaders(self, deviceInfo, authToken):
         headers = default_headers(deviceInfo, authToken)
         self.additional_headers = {p[0]: p[1] for e in headers if (p := e.split(": "))}
-        self.user_agent = self.additional_headers["user-agent"]
-        del self.additional_headers["user-agent"]
+        self.user_agent = self.additional_headers.pop("user-agent")
 
     @property
     def signals(self) -> ReceiverThreadSignals:
         return self.receiver.signals
 
     def isConnected(self) -> bool:
-        return bool(self.receiver)
+        return bool(self.connection)

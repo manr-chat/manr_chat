@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 import keyring
-import codecs
+from .appinfo import manr_app_name
 
-serviceName = codecs.encode("tevaqe_qrfxgbc", "rot_13")
+serviceName = manr_app_name()
 
 # Can't set multiple credentials for same service using keyring.
 # Workaround: encode token in the user name. As the user name is

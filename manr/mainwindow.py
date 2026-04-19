@@ -77,6 +77,10 @@ class MainWindow:
         self.pageSelector.ui.setRightNow.clicked.connect(self.on_setRightNow_clicked)
         self.model.signals.tapSent.connect(self.on_model_tapSent)
         self.model.signals.messageRead.connect(self.on_model_messageRead)
+        # Websocket
+        self.websocket.signals.received.connect(self.on_websocket_received)
+        self.websocket.signals.error.connect(self.on_websocket_error)
+        self.websocket.signals.closed.connect(self.on_websocket_closed)
 
     def buildWidgets(self):
         self.profileList = ProfileListWidget(self.model)
@@ -396,11 +400,6 @@ class MainWindow:
             pbegin = profile("initWebsocket begin")
             try:
                 self.websocket.connect(self.model.user)
-                sig = self.websocket.signals
-                assert sig
-                sig.received.connect(self.on_websocket_received)
-                sig.error.connect(self.on_websocket_error)
-                sig.closed.connect(self.on_websocket_closed)
                 self.model.setWebSocket(self.websocket)
                 self.websocket.runReceiverThread()
             except Exception as e:

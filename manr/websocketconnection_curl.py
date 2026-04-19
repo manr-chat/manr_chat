@@ -15,12 +15,14 @@ class ReceiverWorker(QObject):
     error = Signal(tuple)
     closed = Signal()
 
-    def __init__(self, url, headers):
+    def __init__(self):
         super().__init__()
-        self._url = url
-        self._headers = headers
         self._ws = None
         self._loop = None
+
+    def setConnection(self, url, headers):
+        self._url = url
+        self._headers = headers
 
     @Slot()
     def run(self):
@@ -68,8 +70,8 @@ class WebSocketConnection(QObject):
     def __init__(self):
         super().__init__()
         self.user = None
-        self._worker = None
         self._thread = None
+        self._worker = ReceiverWorker()
 
     def connect(self, user):
         self.user = user
@@ -78,7 +80,7 @@ class WebSocketConnection(QObject):
         headers = self.additional_headers
 
         self._thread = QThread()
-        self._worker = ReceiverWorker(wssUrl, headers)
+        self._worker.setConnection(wssUrl, headers)
         self._worker.moveToThread(self._thread)
 
         self._thread.started.connect(self._worker.run)
@@ -87,12 +89,11 @@ class WebSocketConnection(QObject):
         self._thread.start()
 
     def disconnect(self):
-        if self._worker is not None:
-            self._worker.stop()
+        self._worker.stop()
         if self._thread is not None:
             self._thread.quit()
             self._thread.wait(5000)
-        self._worker = None
+            self._worker.moveToThread(QThread.currentThread())  # move back to main thread
         self._thread = None
 
     def runReceiverThread(self):
@@ -100,7 +101,7 @@ class WebSocketConnection(QObject):
         pass
 
     def send(self, msg: str):
-        assert self._worker is not None, "Not connected"
+        assert self.isConnected(), "Not connected"
         self._worker.send(msg)
 
     def _initHeaders(self, deviceInfo, authToken):
@@ -108,13 +109,12 @@ class WebSocketConnection(QObject):
         self.additional_headers = {p[0]: p[1] for e in headers if (p := e.split(": "))}
 
     @property
-    def signals(self) -> ReceiverWorker | None:
+    def signals(self) -> ReceiverWorker:
         return self._worker
 
     def isConnected(self) -> bool:
         return (
             self._thread is not None
             and self._thread.isRunning()
-            and self._worker is not None
             and self._worker._ws is not None
         )

@@ -16,10 +16,12 @@ class ReceiverThreadSignals(QObject):
     closed = Signal()
 
 class ReceiverThread(QRunnable):
-    def __init__(self, connection):
+    def __init__(self):
         super().__init__()
-        self.connection = connection
         self.signals = ReceiverThreadSignals()
+
+    def setConnection(self, connection):
+        self.connection = connection
 
     @Slot()
     def run(self):
@@ -40,13 +42,13 @@ class ReceiverThread(QRunnable):
                 pass
 
 class WebSocketConnection():
-    receiver: ReceiverThread | None
+    receiver: ReceiverThread
     connection: client.ClientConnection | None
 
     def __init__(self):
         self.user = None
         self.connection = None
-        self.receiver = None
+        self.receiver = ReceiverThread()
         self.receiverRunning = False
 
     def connect(self, user):
@@ -55,13 +57,12 @@ class WebSocketConnection():
         self._initHeaders(self.user.deviceInfo, self.user.sessionId)
         self.connection = client.connect(wssUrl, user_agent_header=self.user_agent,
                                          additional_headers=self.additional_headers)
-        self.receiver = ReceiverThread(self.connection)
+        self.receiver.setConnection(self.connection)
 
     def disconnect(self):
         if self.connection:
             self.connection.close()
         self.connection = None
-        self.receiver = None
         self.receiverRunning = False
 
     def runReceiverThread(self):
@@ -80,8 +81,8 @@ class WebSocketConnection():
         del self.additional_headers["user-agent"]
 
     @property
-    def signals(self) -> ReceiverThreadSignals | None:
-        return self.receiver.signals if self.receiver else None
+    def signals(self) -> ReceiverThreadSignals:
+        return self.receiver.signals
 
     def isConnected(self) -> bool:
         return bool(self.receiver)

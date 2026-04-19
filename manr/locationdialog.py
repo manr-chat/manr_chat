@@ -4,16 +4,17 @@ from typing import Any
 from geopy.geocoders import Nominatim
 
 from PySide6.QtCore import QObject, Slot, Signal, QUrl, Qt
-from PySide6.QtWidgets import QDialogButtonBox
+from PySide6.QtWidgets import QDialogButtonBox, QDialog
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtWebEngineCore import QWebEngineProfile, QWebEngineUrlRequestInfo, QWebEngineUrlRequestInterceptor, QWebEnginePage
 from PySide6.QtWebChannel import QWebChannel
 
 from .datamodel import DataModel
-from .grindr_access.grindr_user import GrindrUser
+from .appinfo import manr_user_agent
 
 # Import the compiled QRC resources
-import manr.map_rc as map_rc  # Registers qrc:/ paths automatically
+import manr.map_rc # Registers qrc:/ paths automatically
 
 class MapBridge(QObject):
     coordinatesChanged = Signal(float, float)
@@ -22,6 +23,10 @@ class MapBridge(QObject):
     def fromMap(self, lat, lon):
         """Called from JS when user clicks on the map."""
         self.coordinatesChanged.emit(lat, lon)
+
+class MapInterceptor(QWebEngineUrlRequestInterceptor):
+    def interceptRequest(self, info: QWebEngineUrlRequestInfo) -> None:
+        info.setHttpHeader(b"Referer", b"https://manr-chat.local")
 
 class LocationDialog(QObject):
     ui: Any
@@ -50,9 +55,16 @@ class LocationDialog(QObject):
         self.ui.locationList.currentRowChanged.connect(self.on_locationList_currentRowChanged)
 
     def initWebView(self):
+        # Dedicated profile to install interceptor, as OSM policy requires Referer header
+        self.interceptor = MapInterceptor()
+        self.osm_profile = QWebEngineProfile("map_storage", self)
+        self.osm_profile.setUrlRequestInterceptor(self.interceptor)
+        self.mapPage = QWebEnginePage(self.osm_profile, self)
+
         # WebEngine map
         self.mapWebView = QWebEngineView()
         self.ui.webViewContainer.layout().addWidget(self.mapWebView)
+        self.mapWebView.setPage(self.mapPage)
 
         # Bridge setup
         self.bridge = MapBridge()
@@ -64,8 +76,7 @@ class LocationDialog(QObject):
         self.mapWebView.setUrl(QUrl("qrc:/map.html"))
 
         # Initialize GeoPy geocoder (Nominatim)
-        # TODO/FIXME: Fix email address!
-        self.geolocator = Nominatim(user_agent="MyMapApp/1.0 (info@myapp.com)")  # Replace with your app info
+        self.geolocator = Nominatim(user_agent=manr_user_agent())
 
     def getLocation(self):
         name = self.ui.locationName.text().strip()
@@ -214,6 +225,7 @@ class LocationDialog(QObject):
 
 def showLocationDialog(model, parent):
     dlg = LocationDialog(model, parent)
-    dlg.ui.exec()
-    print("Result:", dlg.getLocation())
-    return dlg.getLocation()
+    if dlg.ui.exec() == QDialog.DialogCode.Accepted:
+        print("Result:", dlg.getLocation())
+        return dlg.getLocation()
+    return None

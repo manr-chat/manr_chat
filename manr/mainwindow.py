@@ -361,13 +361,15 @@ class MainWindow:
 
     def on_editLocations_triggered(self):
         loc = showLocationDialog(self.model, self.ui)
-        self.updateLocationMenus()
-        self.on_changeLocation_triggered(loc[0])
+        if loc is not None:
+            self.updateLocationMenus()
+            self.on_changeLocation_triggered(loc[0])
 
     def on_editExploreLocations_triggered(self):
         loc = showLocationDialog(self.model, self.ui)
-        self.updateLocationMenus()
-        self.on_changeExploreLocation_triggered(loc[0])
+        if loc is not None:
+            self.updateLocationMenus()
+            self.on_changeExploreLocation_triggered(loc[0])
 
     def initAll(self):
         pbegin = profile("initAll begin")

@@ -30,7 +30,10 @@ from .image_cache import *
 from .datamodel import DataModel
 from .userdb import UserDB
 from .utils import profile
-from .websocketconnection import WebSocketConnection
+if sys.platform == 'win32':
+    from .websocketconnection_curl import WebSocketConnection
+else:
+    from .websocketconnection import WebSocketConnection
 
 class MainWindow:
     ui: Any
@@ -385,7 +388,7 @@ class MainWindow:
             self.initChats()
             self.initAlbums()
             self.setCounterLabels()
-        self.statusBar.updateLoginStatus(self.offlineMode, bool(self.websocket.receiver))
+        self.statusBar.updateLoginStatus(self.offlineMode, self.websocket.isConnected())
         profile("initAll end", start=pbegin)
 
     def initWebsocket(self):
@@ -393,8 +396,8 @@ class MainWindow:
             pbegin = profile("initWebsocket begin")
             try:
                 self.websocket.connect(self.model.user)
-                assert self.websocket.receiver
-                sig = self.websocket.receiver.signals
+                sig = self.websocket.signals
+                assert sig
                 sig.received.connect(self.on_websocket_received)
                 sig.error.connect(self.on_websocket_error)
                 sig.closed.connect(self.on_websocket_closed)
@@ -574,7 +577,7 @@ class MainWindow:
 
     def log_websocket_message(self, msg):
         filename = str(get_cache_dir() / "websocket_log.txt")
-        with open(filename, "a") as file:
+        with open(filename, "a", encoding="utf-8") as file:
             if self.first_log_message:
                 self.first_log_message = False
                 print("", file=file)

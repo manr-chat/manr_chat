@@ -78,3 +78,10 @@ class WebSocketConnection():
         self.additional_headers = {p[0]: p[1] for e in headers if (p := e.split(": "))}
         self.user_agent = self.additional_headers["user-agent"]
         del self.additional_headers["user-agent"]
+
+    @property
+    def signals(self) -> ReceiverThreadSignals | None:
+        return self.receiver.signals if self.receiver else None
+
+    def isConnected(self) -> bool:
+        return bool(self.receiver)

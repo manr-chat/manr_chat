@@ -6,7 +6,7 @@ import zlib
 from .utils import gen_l_dev_info
 
 #user_agent = "grindr3/25.15.2.140001;140001;Free;Android 13;Pixel 2;Google"
-user_agent = "grindr3/25.20.2.140001;140001;Free;Android 13;Pixel 2;Google"
+user_agent = "grindr3/26.7.0.140001;140001;Free;Android 13;Pixel 2;Google"
 user_agent_header = "user-agent: " + user_agent
 cookie_file = ""
 

@@ -2,6 +2,7 @@
 
 import os
 import math
+import json
 from dataclasses import dataclass
 from enum import Enum
 from html import escape
@@ -469,9 +470,9 @@ class ChatWidget(QObject):
         actLocation = QAction("Location", menu)
         actImage = QAction("Image", menu)
         actGaymoji = QAction("Gaymoji", menu)
-        actLocation.setIcon(QIcon("resources/img/profile_ic_location.svg"))
-        actImage.setIcon(QIcon("resources/ic_ff_has_photos.svg"))
-        actGaymoji.setIcon(QIcon("resources/chat_gaymoji_placeholder.svg"))
+        actLocation.setIcon(QIcon("resources/img/location.svg"))
+        actImage.setIcon(QIcon("resources/img/frame_with_picture.svg"))
+        actGaymoji.setIcon(QIcon("resources/img/emoji.svg"))
         actLocation.triggered.connect(lambda: self.on_sendLocation_triggered())
         actImage.triggered.connect(lambda: self.on_sendImage_triggered())
         actGaymoji.triggered.connect(lambda: self.on_sendGaymoji_triggered())
@@ -586,7 +587,7 @@ class ChatWidget(QObject):
         self.chatProfileId = profileId
         self.enableWidgets()
         chat = self.model.getChat(profileId)
-        print("Chat:\n", chat)
+        print("Chat:\n", json.dumps(chat))
         if chat:
             self.addChats(chat)
         if not update:

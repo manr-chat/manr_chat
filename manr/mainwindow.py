@@ -517,9 +517,9 @@ class MainWindow:
         #tw.setTabText(1, f"Favorites ({numFavs})")
         tw.setTabText(2, f"Chats ({numUnreadChats})" if numUnreadChats else "Chats")
         #tw.setTabText(3, f"Taps/Views ({numViews+numTapsReceived+numTapsSent})")
-        twt.setTabText(0, f"Viewed by ({numViews})")
-        twt.setTabText(1, f"Taps received ({numTapsReceived})")
-        twt.setTabText(2, f"Taps sent ({numTapsSent})")
+        twt.setTabText(0, f"👀Viewed by ({numViews})")
+        twt.setTabText(1, f"📩Taps received ({numTapsReceived})")
+        twt.setTabText(2, f"📤Taps sent ({numTapsSent})")
         profile("setCounterLabels end", start=pbegin)
 
     def onProfileListSelected(self, listWidget, curIdx):

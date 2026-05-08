@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="twitter.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="false"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="18.34"
+     inkscape:cx="11.450382"
+     inkscape:cy="11.804798"
+     inkscape:window-width="1440"
+     inkscape:window-height="842"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="m 8.3553292,21.82401 c 3.4568018,0.02117 6.7765788,-1.321226 9.2196218,-3.726393 2.444158,-2.406282 3.806604,-5.6737 3.785438,-9.0759142 V 8.4335007 C 22.247148,7.7940537 23.014707,7.0075562 23.628531,6.1107708 22.793017,6.469485 21.909599,6.7078851 21.005016,6.818173 21.964187,6.2555933 22.683843,5.3699481 23.031417,4.3261122 22.13686,4.8530433 21.157637,5.2251256 20.134968,5.422307 18.719049,3.9373193 16.466502,3.571921 14.640625,4.5310917 12.815862,5.4891482 11.871173,7.5356013 12.336834,9.5207833 8.6616845,9.3425403 5.2371897,7.635863 2.9178019,4.8240788 1.7180033,6.8738739 2.338512,9.4907048 4.3359483,10.806361 3.6252041,10.779625 2.9322842,10.588014 2.3106615,10.248238 v 0.05013 c -0.013368,2.127776 1.4838735,3.977048 3.5949397,4.436024 -0.6606133,0.174901 -1.3524192,0.202752 -2.0252868,0.08021 0.6071405,1.804711 2.3026776,3.037929 4.2332727,3.081376 -1.6108717,1.276666 -3.613878,1.978498 -5.6814975,1.994094 -0.3631702,-0.01114 -0.7241124,-0.04122 -1.0839406,-0.09024 2.0932419,1.313428 4.5262597,2.005235 7.0071802,1.994094"
+       id="path1"
+       style="stroke-width:1.11402" />
+  </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+      <cc:Work
+         rdf:about="">
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

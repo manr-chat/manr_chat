@@ -6,7 +6,7 @@
 "relationshipStatus": {"1": "Single", "2": "Dating", "3": "Exclusive", "4": "Committed", "5": "Partnered", "6": "Engaged", "7": "Married", "8": "Open Relationship"},
 "bodyType": {"1": "Toned (Wohlgeformt)", "2": "Average (Durchschnitt)", "3": "Large (Groß)", "4": "Muscular (Muskulös)", "5": "Slim (Schlank)", "6": "Stocky (Dünn)"},
 "sexualPosition": {"1": "Top", "2": "Bottom", "3": "Versatile", "4": "Vers Bottom", "5": "Vers Top", "6": "Side"},
-"sexualPositionIcon": {"1": "ic_ff_top.svg", "2": "ic_ff_bottom.svg", "3": "ic_ff_versatile.svg", "4": "ic_ff_vers_bottom.svg", "5": "ic_ff_vers_top.svg", "6": "ic_ff_side.svg"},
+"sexualPositionIcon": {"1": "position_top.svg", "2": "position_bottom.svg", "3": "position_versatile.svg", "4": "position_vers_bottom.svg", "5": "position_vers_top.svg", "6": "position_side.svg"},
 "tribes": {"1": "Bear", "2": "Clean-Cut", "3": "Daddy", "4": "Discreet", "5": "Geek", "6": "Jock", "7": "Leather", "8": "Otter", "9": "Poz", "10": "Rugged", "11": "Trans", "12": "Twink", "13": "Sober"}, 
 "vaccines": {"1": "COVID-19", "2": "Monkeypox", "3": "Meningitis"},
 "acceptsNsfwPics": {"1": "Never", "2": "Not At First", "3": "Yes Please"},

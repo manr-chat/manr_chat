@@ -87,7 +87,7 @@
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>resources/img/profile_ic_location.svg</normaloff>resources/img/profile_ic_location.svg</iconset>
+              <normaloff>resources/img/location.svg</normaloff>resources/img/location.svg</iconset>
             </property>
             <property name="checkable">
              <bool>true</bool>

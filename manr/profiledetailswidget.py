@@ -101,9 +101,9 @@ class ProfileDetailsWidget(QtCore.QObject):
         def linkLabel(name, baseUrl, icon, userId):
             return f"<a href='{baseUrl}{userId}'><img src='mydata://{icon}' height=14/> {name}: {userId}</a>"
         def instaLabel(userId):
-            return linkLabel("Instagram", "https://www.instagram.com/", "ic_instagram.svg", userId)
+            return linkLabel("Instagram", "https://www.instagram.com/", "logo_instagram.svg", userId)
         def twitterLabel(userId):
-            return linkLabel("Twitter", "https://www.twitter.com/", "ic_twitter.svg", userId)
+            return linkLabel("Twitter", "https://www.twitter.com/", "logo_twitter.svg", userId)
         def genericLabel(site, userId):
             match site:
                 case "instagram": return instaLabel(userId)
@@ -200,7 +200,7 @@ class ProfileDetailsWidget(QtCore.QObject):
         tags = get(["profileTags", "tags"])
         # About
         addIf(age, f"Age: {age}")
-        addIf(distance > 0, "Distance: " + (f"{distance}m" if distance < 2000 else f"{distance/1000:.1f}km"), "profile_ic_location.svg")
+        addIf(distance > 0, "Distance: " + (f"{distance}m" if distance < 2000 else f"{distance/1000:.1f}km"), "location.svg")
         addIf(lastOnline, "Last online: " + formatTimeStamp(lastOnline))
 
         # Stats
@@ -213,7 +213,7 @@ class ProfileDetailsWidget(QtCore.QObject):
         addIf(ethnicity, f"{ethnicity}", "profile_ethnicity.svg")
         addIf(relationshipStatus, f"{relationshipStatus}", "profile_relationship_status.svg")
         addList(tribes, "", "profile_tribes.svg")
-        addList(tribesImInto, "Tribes I'm into:", "profile_tribes.svg")
+        addList(tribesImInto, "Tribes I'm into: ", "profile_tribes.svg")
 
         # Expectations
         addList(lookingFor, "Looking for: ", "profile_looking_for.svg")

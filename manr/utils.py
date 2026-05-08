@@ -20,7 +20,7 @@ def unique_list(l):
 
 def load_json(filename):
     import json
-    with open(filename) as f:
+    with open(filename, encoding="utf-8") as f:
         return json.load(f)
 
 def save_json(filename, data, indent=2):

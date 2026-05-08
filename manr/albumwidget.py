@@ -85,5 +85,5 @@ class AlbumWidget(QtCore.QObject):
         print(curDir, baseUrl)
         self.webview.setHtml(text, baseUrl=baseUrl)
         # Write HTML to temp file for debugging purposes
-        with open(get_cache_dir() / "album_temp.html", "w") as f:
+        with open(get_cache_dir() / "album_temp.html", "w", encoding="utf-8") as f:
             f.write(text)

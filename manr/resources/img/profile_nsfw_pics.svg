@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="true"
-     inkscape:zoom="5.8851908"
-     inkscape:cx="-12.06418"
-     inkscape:cy="10.449959"
+     inkscape:zoom="23.540763"
+     inkscape:cx="6.9878788"
+     inkscape:cy="10.258801"
      inkscape:window-width="1920"
      inkscape:window-height="1008"
      inkscape:window-x="0"
@@ -47,13 +47,6 @@
        enabled="true"
        visible="true" />
   </sodipodi:namedview>
-  <path
-     d="m 8.5670545,6.970245 c -0.9374575,0 -1.7020519,0.7645937 -1.7020519,1.7020513 0,0.9374585 0.7645944,1.7020517 1.7020519,1.7020517 0.9374582,0 1.7020525,-0.7645932 1.7020525,-1.7020517 0,-0.9374576 -0.7645943,-1.7020513 -1.7020525,-1.7020513 z M 14.524237,12.0764 11.120133,15.480505 8.5670545,13.778453 5.1629508,17.182557 v 0.851026 c 0,0.851026 0.8510256,0.851026 0.8510256,0.851026 H 17.928341 c 0,0 0.804485,-0.05984 0.851026,-0.851026 V 16.33153 Z"
-     fill="#2e3434"
-     fill-opacity="0.34902"
-     id="path1"
-     style="stroke-width:1.70205"
-     sodipodi:nodetypes="sssssccccsccccc" />
   <rect
      style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.03334;stroke-linecap:round;stroke-linejoin:round"
      id="rect1"

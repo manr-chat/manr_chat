@@ -209,7 +209,7 @@ class ListModel(QtCore.QAbstractListModel):
         for i in range(len(self.imgHashes)):
             if imgDesc.name == self.imgHashes[i] or \
                self.imgHashes[i] and imgDesc.name == base_hash_from_url(self.imgHashes[i]):
-                self.images[i] = QtGui.QPixmap(imgFileName)
+                self.images[i] = QtGui.QPixmap(imgFileName) if imgFileName else self.blankProfileImage
                 self.dataChanged.emit(self.index(0, i), self.index(0, i))
 
 class ProfileListWidget:

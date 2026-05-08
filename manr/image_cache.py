@@ -144,11 +144,14 @@ def extension_from_headers(headers):
 def make_parent_dir(fname):
     Path(fname).parent.mkdir(parents=True, exist_ok=True)
 
-def download_img(mediaDesc: MediaDescription) -> str | None:
-    print("I: Downloading", mediaDesc.mediaType, ":", mediaDesc.name, time_str())
+def write_buffer(fname, buffer_io):
+    make_parent_dir(fname)
+    with open(fname, "wb") as f:
+        f.write(buffer_io.getvalue())
+
+def download_url(url):
     headers_io = BytesIO()
     buffer_io = BytesIO()
-    url = mediaDesc.getUrl()
     c = pycurl.Curl()
     c.setopt(c.URL, url)
     c.setopt(c.HEADERFUNCTION, headers_io.write)
@@ -161,6 +164,12 @@ def download_img(mediaDesc: MediaDescription) -> str | None:
     c.perform()
     code = c.getinfo(pycurl.HTTP_CODE)
     c.close()
+    return code, headers_io, buffer_io
+
+def download_img(mediaDesc: MediaDescription) -> str | None:
+    print("I: Downloading", mediaDesc.mediaType, ":", mediaDesc.name, time_str())
+    url = mediaDesc.getUrl()
+    code, headers_io, buffer_io = download_url(url)
     headers = headers_io.getvalue().decode()
     ext = extension_from_headers(headers)
     if code != 200 or ext == ".xml" or ext == ".html":
@@ -172,9 +181,7 @@ def download_img(mediaDesc: MediaDescription) -> str | None:
         print("WARNING: Conflicting extenstions: suffix ", fpath.suffix, ", from mime type:", ext)
         fpath = str(fpath) + ext
     fname = str(fpath)
-    make_parent_dir(fname)
-    with open(fname, "wb") as f:
-        f.write(buffer_io.getvalue())
+    write_buffer(fname, buffer_io)
     return fname
 
 def get_cached_image_name(mediaDesc: MediaDescription) -> str | None:
@@ -203,3 +210,14 @@ def get_or_download_full_media(mediaDesc: MediaDescription) -> str | None:
         if fname:
             return fname
     return get_or_download_image(mediaDesc)
+
+def download_gaymoji_list():
+    file = cache_root / "gaymoji.json"
+    if file.exists():
+        return str(file)
+    url = cdn_gaymoji + "gaymoji"
+    code, _, buffer_io = download_url(url)
+    if code != 200:
+        return None
+    write_buffer(str(file), buffer_io)
+    return str(file)

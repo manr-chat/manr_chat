@@ -25,6 +25,8 @@ Simply delete the application folder. Additionally, delete settings and caches i
 
 ## Usage
 
+<img src="images/ui_screenshot.png">
+
 If you don't have a Grindr account already, use the official app first to create an account and set up your profile. Account creation is usually only done once and not yet implemented in MANR.
 
 On first use of MANR, you should see the login dialog. Here you can enter your account credentials, i.e. email address and password, to log in. Once an account is set up you can be logged in automatically the next time you start MANR. Toggle the "File -> Log in automatically" option to change that. You can manage multiple accounts and quickly log in using the "File -> Log in as" menu.

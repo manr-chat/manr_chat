@@ -25,6 +25,7 @@ from PySide6.QtWebEngineWidgets import QWebEngineView
 from .datamodel import DataModel
 from .image_cache import *
 from .imageselectiondialog import showImageSelectionDialog
+from .gaymojiselectiondialog import showGaymojiSelectionDialog
 from .utils import formatTimeStamp
 
 Sender = Enum("Sender", ["sent", "received"])
@@ -673,8 +674,10 @@ class ChatWidget(QObject):
             self.scheduleRefresh()
 
     def on_sendGaymoji_triggered(self):
-        print("TODO: send gaymoji")
-        self.scheduleRefresh()
+        imageId = showGaymojiSelectionDialog(self.model, self.chatProfileId, self.ui)
+        if imageId:
+            self.model.sendGaymojiChat(self.chatProfileId, imageId)
+            self.scheduleRefresh()
 
     def on_closeReply_clicked(self):
         self.clearReply()

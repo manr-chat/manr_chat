@@ -3,10 +3,13 @@
 from PySide6 import QtWidgets, QtGui, QtCore
 from PySide6.QtUiTools import QUiLoader
 
+from typing import Any
 from .image_cache import DownloadWorker, MediaType, MediaDescription, get_cached_image_name, decorated_hash_from_url
 from .utils import formatBool, formatTimeStamp, profile
 
 class ImageSelectionDialog(QtCore.QObject):
+    ui: Any
+
     def __init__(self, model, chatId, parent=None):
         super().__init__()
         self.model = model
@@ -42,7 +45,7 @@ class ImageSelectionDialog(QtCore.QObject):
         assert imgDesc.mediaType == MediaType.url
         for row in range(self.ui.imageList.count()):
             item = self.ui.imageList.item(row)
-            itemImageId, itemImgHash = item.data(QtCore.Qt.UserRole)
+            itemImageId, itemImgHash = item.data(QtCore.Qt.ItemDataRole.UserRole)
             if imgDesc.name == itemImgHash:
                 img = QtGui.QPixmap(imgFileName)
                 self.pixmaps[itemImageId] = img
@@ -89,7 +92,7 @@ class ImageSelectionDialog(QtCore.QObject):
             img = self.getImage(imageUrl, imgHash)
             self.pixmaps[imageId] = img
             item.setIcon(img)
-            item.setData(QtCore.Qt.UserRole, (imageId, imgHash))
+            item.setData(QtCore.Qt.ItemDataRole.UserRole, (imageId, imgHash))
             self.ui.imageList.addItem(item)
 
     def on_imageList_currentRowChanged(self, curRow):
@@ -107,6 +110,6 @@ class ImageSelectionDialog(QtCore.QObject):
 
 def showImageSelectionDialog(model, chatId, parent):
     dlg = ImageSelectionDialog(model, chatId, parent)
-    if dlg.ui.exec() == QtWidgets.QDialog.Accepted:
+    if dlg.ui.exec() == QtWidgets.QDialog.DialogCode.Accepted:
         return dlg.getImageId()
     return None

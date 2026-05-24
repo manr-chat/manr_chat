@@ -529,6 +529,11 @@ class DataModel:
         chatBody = {"mediaId": imageId}
         self._sendGenericChat(profileId, chatType, chatBody, replyToId)
 
+    def sendGaymojiChat(self, profileId, imageId, replyToId=None):
+        chatType = "Gaymoji"
+        chatBody = {"imageHash": imageId}
+        self._sendGenericChat(profileId, chatType, chatBody, replyToId)
+
     def sendMessageReaction(self, convId, msgId):
         self.user.react_to_message(convId, msgId)
 

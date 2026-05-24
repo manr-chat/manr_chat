@@ -467,17 +467,23 @@ class ChatWidget(QObject):
 
     def setupSpecialChatMenu(self):
         menu = QMenu(self.ui.sendSpecialChat)
-        actLocation = QAction("Location", menu)
+        self.locationMenu = menu.addMenu(QIcon("resources/img/location.svg"), "Location")
         actImage = QAction("Image", menu)
         actGaymoji = QAction("Gaymoji", menu)
-        actLocation.setIcon(QIcon("resources/img/location.svg"))
         actImage.setIcon(QIcon("resources/img/frame_with_picture.svg"))
         actGaymoji.setIcon(QIcon("resources/img/emoji.svg"))
-        actLocation.triggered.connect(lambda: self.on_sendLocation_triggered())
         actImage.triggered.connect(lambda: self.on_sendImage_triggered())
         actGaymoji.triggered.connect(lambda: self.on_sendGaymoji_triggered())
-        menu.addActions([actLocation, actImage, actGaymoji])
+        menu.addActions([actImage, actGaymoji])
         self.ui.sendSpecialChat.setMenu(menu)
+
+    def updateLocationMenu(self):
+        self.locationMenu.clear()
+        for name in self.model.getLocationList().keys():
+            actLoc = QAction(name, self.locationMenu)
+            actLoc.triggered.connect(lambda checked=False, name=name: self.on_sendLocation_triggered(name))
+            self.locationMenu.addAction(actLoc)
+        self.locationMenu.addSeparator()
 
     def enableWidgets(self):
         enabled = bool(self.chatProfileId) and not self.model.offlineMode
@@ -652,8 +658,12 @@ class ChatWidget(QObject):
             self.model.sendTextChat(self.chatProfileId, message, replyToId)
             self.scheduleRefresh()
 
-    def on_sendLocation_triggered(self):
-        print("TODO: send location")
+    def on_sendLocation_triggered(self, name):
+        locations = self.model.getLocationList()
+        if not name in locations:
+            print(f"ERROR: named location '{name}' not found!")
+            return
+        self.model.sendLocationChat(self.chatProfileId, locations[name])
         self.scheduleRefresh()
 
     def on_sendImage_triggered(self):

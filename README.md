@@ -62,7 +62,6 @@ Missing features:
 - Creating and sending albums. (Note: sending individual pictures is implemented)
 - Translations, including server provided translations for tags, genders, etc.
 - "Taken on Grindr" watermark (Planned)
-- Sending location (Planned)
 - Some other minor fields in the user profile
 - "Explore locations" in the user grid. These are stupid anyway and won't be implemented.
 

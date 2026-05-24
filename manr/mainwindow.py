@@ -148,8 +148,7 @@ class MainWindow:
         self.pageSelector.ui.setExploreLocation.setMenu(self.exploreMenu)
         self.pageSelector.ui.setLocation.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.MenuButtonPopup)
         self.pageSelector.ui.setExploreLocation.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.MenuButtonPopup)
-        # TODO: remove
-        self.updateLocationMenus()
+        #self.updateLocationMenus()
 
     def updateLocationMenus(self):
         self.locationMenu.clear()
@@ -169,6 +168,7 @@ class MainWindow:
         actEditExplore.triggered.connect(self.on_editExploreLocations_triggered)
         self.locationMenu.addAction(actEditLoc)
         self.exploreMenu.addAction(actEditExplore)
+        self.chatWidget.updateLocationMenu()
 
     def setupActionGroups(self):
         self.makeExclusiveGroup([self.ui.actionViewCropped, self.ui.actionViewLetterboxed])

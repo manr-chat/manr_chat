@@ -219,8 +219,17 @@ class DataModel:
             #    print(i, e["type"], "profileId" in e["data"])
             #    types.add(e["type"])
             #    if "profileId" not in e["data"]:
-            #        print(i, e)
+            #        print(i, json.dumps(e))
+            allProfiles = profiles
             profiles = [e for e in profiles if "profileId" in e["data"]]
+            topPicks = []
+            for e in allProfiles:
+                if "profileId" not in e["data"]:
+                    if e["type"].startswith("top_picks"):
+                        picks = e["data"]["items"]
+                        picks = [{"type": i["@type"], "data": i["profileItem"]} for i in picks]
+                        topPicks += picks
+            profiles += topPicks
             cache = profiles
         #print("Item types:", types)
         return cache

@@ -44,7 +44,7 @@ Choosing a location in the "My location" view actively sets your Grindr location
 MANR contains most commonly used basic chat functionality, but certain features are still missing. Some featured are important but rarely used and thus not implemented yet, some I consider unnecesary.
 
 Features include:
-- Browse list of nearby user profiles, explore locations, and view "right now" profiles
+- Browse list of nearby user profiles, explore locations, and view "right now" profiles. "For You" profiles appear at the end of the nearby list.
 - Set current location, save list of favorite "explore" locations
 - View profile details of users
 - Chat with users, including pictures, location, reactions
@@ -64,7 +64,7 @@ Missing features:
 - "Taken on Grindr" watermark (Planned)
 - Sending location (Planned)
 - Some other minor fields in the user profile
-- "For You" profiles and "Explore locations" in the user grid. These are stupid anyway and won't be implemented.
+- "Explore locations" in the user grid. These are stupid anyway and won't be implemented.
 
 ## License
 

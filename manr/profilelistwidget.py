@@ -5,8 +5,11 @@ from PySide6.QtCore import Qt
 from PySide6.QtUiTools import QUiLoader
 
 from typing import Any
+import enum
 from .image_cache import DownloadWorker, MediaType, media_description_from_hash, get_cached_image_name, base_hash_from_url
 from .utils import *
+
+ProfileFlags = enum.Flag("ProfileFlags", ["top_pick"])
 
 def getCroppedSquare(rect):
     w, h = rect.width(), rect.height()
@@ -67,18 +70,17 @@ class ItemDelegate(QtWidgets.QStyledItemDelegate):
         self.initStyleOption(opt, modelIdx)
         painter.setRenderHint(QtGui.QPainter.RenderHint.SmoothPixmapTransform)
         painter.setRenderHint(QtGui.QPainter.RenderHint.TextAntialiasing)
-        #t = opt.text
-        #opt.text = ""
-        #self.style.drawControl(QtWidgets.QStyle.CE_ItemViewItem, opt, painter, option.widget)
-        #opt.text = t
-        #self.style.drawItemText(painter, opt.rect, Qt.AlignCenter, opt.palette, bool(opt.state & QtWidgets.QStyle.State_Enabled), opt.text)
-        #return
-        #print("opt.rect:", opt.rect)
+
         ## Draw selection marker
+        profileFlags = self.model.getProfileFlags(modelIdx)
+        color = None
         if opt.state & QtWidgets.QStyle.StateFlag.State_Selected:
-            #self.style.drawPrimitive(QtWidgets.QStyle.PE_PanelItemViewItem, opt, painter, opt.widget)
+            color = QtGui.QColor("gold").darker(150)
+        elif profileFlags & ProfileFlags.top_pick:
+            color = QtGui.QColor("darkred")
+        if color:
             brush = opt.palette.brush(QtGui.QPalette.ColorGroup.Normal, QtGui.QPalette.ColorRole.Highlight)
-            brush = QtGui.QBrush(QtGui.QColor("gold").darker(150))
+            brush = QtGui.QBrush(color)
             painter.fillRect(opt.rect, brush)            
         opt.rect = opt.rect.marginsRemoved(QtCore.QMargins(self.margin,self.margin,self.margin,self.margin))
 
@@ -119,6 +121,7 @@ class ListModel(QtCore.QAbstractListModel):
         self.labels = []
         self.imgHashes = []
         self.images = []
+        self.profileFlags = []
         self.iconSize = QtCore.QSize(128, 128)
 
     def data(self, index, role):
@@ -141,15 +144,19 @@ class ListModel(QtCore.QAbstractListModel):
         assert False
         return 1
 
-    def getImage(self, modelIdx):
+    def _rowFromIdx(self, modelIdx):
         r, c = modelIdx.row(), modelIdx.column()
         assert c == 0 and 0 <= r < len(self.profileIds)
-        return self.images[r]
+        return r
+
+    def getImage(self, modelIdx):
+        return self.images[self._rowFromIdx(modelIdx)]
 
     def getImageHash(self, modelIdx):
-        r, c = modelIdx.row(), modelIdx.column()
-        assert c == 0 and 0 <= r < len(self.profileIds)
-        return self.imgHashes[r]
+        return self.imgHashes[self._rowFromIdx(modelIdx)]
+
+    def getProfileFlags(self, modelIdx):
+        return self.profileFlags[self._rowFromIdx(modelIdx)]
 
     def getScaledImage(self, idx):
         img = self.images[idx]
@@ -163,18 +170,26 @@ class ListModel(QtCore.QAbstractListModel):
         return media_description_from_hash(imgHash, MediaType.thumb)
 
     # Qt defines setData, use a different name
-    def setProfileData(self, profileIds, labels, imgHashes):
-        import time
+    def setProfileData(self, profileIds, labels, imgHashes, profileFlags):
         pbegin = profile("setProfileData begin")
         self.beginResetModel()
         assert len(profileIds) == len(labels) == len(imgHashes)
         self.profileIds = profileIds
         self.labels = labels
         self.imgHashes = imgHashes
+        self.profileFlags = profileFlags
+        pload = profile("setProfileData before image load", start=pbegin)
+        self._updateImagesFromHashes()
+        pupdate = profile("setProfileData before endResetModel", start=pload)
+        self.endResetModel()
+        profile("setProfileData end", start=(pupdate, pbegin))
+
+    def _updateImagesFromHashes(self):
+        import time
         self.images = []
         loadTimes, backgroundTimes, cacheTimes = 0, 0, 0
-        ploop = profile("setProfileData before loop", start=pbegin)
-        for imgHash in imgHashes:
+        pbegin = profile("_updateImagesFromHashes begin")
+        for imgHash in self.imgHashes:
             img = self.blankProfileImage
             if imgHash:
                 t0 = time.time()
@@ -189,15 +204,13 @@ class ListModel(QtCore.QAbstractListModel):
                     self.startBackgroundDownload(imgHash)
                     backgroundTimes += time.time() - t
             self.images.append(img)
-        pupdate = profile("setProfileData before endResetModel", start=ploop)
+        profile("_updateImagesFromHashes end", start=pbegin)
         profile(f"Sum of file load times: {time_diff(loadTimes)},"+
                 f" sum of triggering background download times: {time_diff(backgroundTimes)}"+
                 f" sum of cache lookup times: {time_diff(cacheTimes)}")
-        self.endResetModel()
-        profile("setProfileData end", start=(pupdate, pbegin))
 
     def clear(self):
-        self.setProfileData([], [], [])
+        self.setProfileData([], [], [], [])
 
     def startBackgroundDownload(self, imgHash):
         worker = DownloadWorker(self._mediaDescription(imgHash))
@@ -289,10 +302,11 @@ class ProfileListWidget:
         pbegin = profile("populateList begin")
         self.listModel.clear()
         maxItems, numItems, nonBlank = 2000, 0, 0
-        profileIds, labels, imgHashes = [], [], []
+        profileIds, labels, imgHashes, flags = [], [], [], []
         if self.doFilter: print("Profiles before filter:", len(profiles))
         for pIdx, p in enumerate(profiles):
             d = p["data"]
+            isForYouPick = "TopPicks" in p.get("type", "")
             pId = str(d.get("profileId", -pIdx))
             #profile("P", pId)
             img_hashes = self.model.getImageHashes(d)
@@ -308,12 +322,13 @@ class ProfileListWidget:
             profileIds.append(pId)
             labels.append(label)
             imgHashes.append(img_hash)
+            flags.append(ProfileFlags.top_pick if isForYouPick else ProfileFlags(0))
             numItems += 1
             if numItems >= maxItems:
                 break
         if self.doFilter: print("Profiles after filter:", len(profileIds))
         pdata = profile("Before setProfileData", start=pbegin)
-        self.listModel.setProfileData(profileIds, labels, imgHashes)
+        self.listModel.setProfileData(profileIds, labels, imgHashes, flags)
         profile("Profiles: %d, non blank: %d, displayed: %d" % (len(profiles), nonBlank, numItems))
         profile("populateList end", start=(pdata, pbegin))
         #profile("Profiles:\n", profiles)

@@ -175,7 +175,9 @@ class ProfileDetailsWidget(QtCore.QObject):
         if displayName:
             displayName += "\n"
         aboutText = escape(get("aboutMe", ""))
-        distance = get(["distanceMeters", "distance"], -1)
+        # Sometimes the "distanceMeters" value from cascade profiles is poisoned while the
+        # "distance" value from profile details is correct.
+        distance = min(get("distance", -1), get("distanceMeters", -1))
         lastOnline = get("lastOnline", None)
         age = get("age", None)
         height = get(["height", "heightCm"], None)

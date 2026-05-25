@@ -46,7 +46,7 @@ MANR contains most commonly used basic chat functionality, but certain features 
 Features include:
 - Browse list of nearby user profiles, explore locations, and view "right now" profiles. "For You" profiles appear at the end of the nearby list.
 - Set current location, save list of favorite "explore" locations
-- View profile details of users
+- View profile details of users: general stats, "right now" details, "Taken on Grindr" watermark
 - Chat with users, including pictures, location, reactions
 - View received albums
 - Upload pictures
@@ -61,7 +61,6 @@ Missing features:
 - Changing own user profile text / stats / profile picture.
 - Creating and sending albums. (Note: sending individual pictures is implemented)
 - Translations, including server provided translations for tags, genders, etc.
-- "Taken on Grindr" watermark (Planned)
 - Some other minor fields in the user profile
 - "Explore locations" in the user grid. These are stupid anyway and won't be implemented.
 

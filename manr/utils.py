@@ -8,7 +8,7 @@ import math
 from pathlib import Path
 from typing import Generator
 
-from PySide6 import QtCore
+from PySide6 import QtCore, QtGui
 from PySide6.QtWidgets import QApplication
 
 def flatten(xss):
@@ -102,6 +102,39 @@ def formatTimeStamp(t):
             return f"in {difftext} ({date})"
         return f"{difftext} ago ({date})"
     return date
+
+
+def getCroppedSquare(rect):
+    w, h = rect.width(), rect.height()
+    s = min(w, h)
+    return QtCore.QRect((w-s)//2, (h-s)//2, s, s)
+
+def scaleTargetRect(src, target, noUpscale=True):
+    ws = target.width() / max(1, src.width())
+    hs = target.height() / max(1, src.height())
+    scale = min(ws, hs, 1) if noUpscale else min(ws, hs)
+    w, h = int(round(src.width()*scale)), int(round(src.height()*scale))
+    x = target.x() + (target.width()-w)//2
+    y = target.y() + (target.height()-h)//2
+    return QtCore.QRect(x, y, w, h)
+
+def loadSvgForSize(imgFileName, w=None, h=None, dpr=1.0):
+    from PySide6 import QtSvg
+    renderer = QtSvg.QSvgRenderer(imgFileName)
+    srcSize = renderer.defaultSize()
+    if not w or not h:
+        w, h = srcSize.width(), srcSize.height()
+    qi = QtGui.QImage(int(w*dpr), int(h*dpr), QtGui.QImage.Format.Format_ARGB32)
+    qi.fill(QtGui.QColor(0, 0, 0, 0))
+    srcRect = QtCore.QRect(0, 0, srcSize.width(), srcSize.height())        
+    targetRect = QtCore.QRect(0, 0, int(w*dpr), int(h*dpr))
+    targetRect = scaleTargetRect(srcRect, targetRect, noUpscale=False)
+    p = QtGui.QPainter(qi)
+    renderer.render(p, targetRect)
+    p.end()
+    pm = QtGui.QPixmap.fromImage(qi)
+    pm.setDevicePixelRatio(dpr)
+    return pm
 
 
 @contextmanager

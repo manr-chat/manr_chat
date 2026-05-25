@@ -11,20 +11,6 @@ from .utils import *
 
 ProfileFlags = enum.Flag("ProfileFlags", ["top_pick"])
 
-def getCroppedSquare(rect):
-    w, h = rect.width(), rect.height()
-    s = min(w, h)
-    return QtCore.QRect((w-s)//2, (h-s)//2, s, s)
-
-def scaleTargetRect(src, target, noUpscale=True):
-    ws = target.width() / max(1, src.width())
-    hs = target.height() / max(1, src.height())
-    scale = min(ws, hs, 1) if noUpscale else min(ws, hs)
-    w, h = int(round(src.width()*scale)), int(round(src.height()*scale))
-    x = target.x() + (target.width()-w)//2
-    y = target.y() + (target.height()-h)//2
-    return QtCore.QRect(x, y, w, h)
-
 scaling = 1
 class ItemDelegate(QtWidgets.QStyledItemDelegate):
     def __init__(self, view, model):

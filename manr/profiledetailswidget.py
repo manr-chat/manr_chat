@@ -21,10 +21,14 @@ class ProfileDetailsWidget(QtCore.QObject):
         self.setupTapMenu()
         self.model = model
         self.ui.imageLabels = []
+        self.ui.iconLabels = []
         self.imageHashes = []
         self.imageResourceCache = {}
         self.currentProfile, self.currentProfileIdx = None, None
         self.loadingProfileImage = QtGui.QPixmap("resources/img/loading_blank.png")
+        dpr = self.ui.devicePixelRatio()
+        self.takenOnCameraIcon = loadSvgForSize("resources/img/taken_on_camera.svg", dpr=dpr)
+        self.notTakenOnCameraIcon = loadSvgForSize("resources/img/not_taken_on_camera.svg", dpr=dpr)
         self.loadMappings()
         self.loadImageResources()
         self.loadLogo()
@@ -59,9 +63,12 @@ class ProfileDetailsWidget(QtCore.QObject):
 
     def initImageLabels(self, count):
         for i in range(count - len(self.ui.imageLabels)):
-            label = QtWidgets.QLabel()
-            self.ui.imageScroll.layout().addWidget(label)
-            self.ui.imageLabels.append(label)
+            imgLabel = QtWidgets.QLabel()
+            iconLabel = QtWidgets.QLabel()
+            self.ui.imageScroll.layout().addWidget(imgLabel)
+            self.ui.imageScroll.layout().addWidget(iconLabel)
+            self.ui.imageLabels.append(imgLabel)
+            self.ui.iconLabels.append(iconLabel)
         assert len(self.ui.imageLabels) >= count
 
     def showImageLabels(self, count):
@@ -70,9 +77,12 @@ class ProfileDetailsWidget(QtCore.QObject):
         N = len(self.ui.imageLabels)
         for i in range(min(count, N)):
             self.ui.imageLabels[i].show()
+            self.ui.iconLabels[i].show()
         for i in range(count, N):
             self.ui.imageLabels[i].hide()
             self.ui.imageLabels[i].clear()
+            self.ui.iconLabels[i].hide()
+            self.ui.iconLabels[i].clear()
 
     def sendTap(self, tap_type):
         #profile("Sending tap to", self.currentProfile["profileId"], ", type: ", tap_type)
@@ -122,7 +132,9 @@ class ProfileDetailsWidget(QtCore.QObject):
         fields = []
         knownFields = {"@type", "photoMediaHashes", "profileImageMediaHash", "photoHash", "medias",
                        "approximateDistance", "isFavorite", "showAge", "showDistance",
-                       "showTribes", "showPosition", "tapped", "tapType", "upsellItemType"}
+                       "showTribes", "showPosition", "tapped", "tapType", "upsellItemType",
+                       "rightNowFullImageUrl", "rightNowThumbnailUrl", "rightNowMedias",
+                       "takenOnGrindrMetadata"}
         # These are "known" but not specifically handled. Only show when not an uninteresting default.
         hideDefaults = {"isBoosting": False,
                         "hasChattedInLast24Hrs": False,
@@ -132,6 +144,7 @@ class ProfileDetailsWidget(QtCore.QObject):
                         "isRightNow": False,
                         "unreadCount": 0,
                         "rightNow": "NOT_ACTIVE",
+                        "rightNowShareLocation": "NONE",
                         "isPopular": False,
                         "hasUnreadThrob": False,
                         "isVisiting": False,
@@ -248,26 +261,11 @@ class ProfileDetailsWidget(QtCore.QObject):
             result += "\n\nOther fields:\n" + "\n".join(unknown)
         return result
 
-    def loadSvgForSize(self, imgFileName, w, h):
-        from PySide6 import QtSvg
-        from .profilelistwidget import scaleTargetRect
-        renderer = QtSvg.QSvgRenderer(imgFileName)
-        qi = QtGui.QImage(w, h, QtGui.QImage.Format.Format_ARGB32)
-        qi.fill(QtGui.QColor(0, 0, 0, 0))
-        srcSize = renderer.defaultSize()
-        srcRect = QtCore.QRect(0, 0, srcSize.width(), srcSize.height())        
-        targetRect = QtCore.QRect(0, 0, w, h)
-        targetRect = scaleTargetRect(srcRect, targetRect, noUpscale=False)
-        p = QtGui.QPainter(qi)
-        renderer.render(p, targetRect)
-        p.end()
-        return QtGui.QPixmap.fromImage(qi)
-
     def loadImageResources(self):
         import pathlib
         for img in pathlib.Path("resources/img/").glob("*.svg"):
             img = pathlib.Path(img).name
-            pm = self.loadSvgForSize(f"resources/img/{img}", 28, 28)
+            pm = loadSvgForSize(f"resources/img/{img}", 28, 28, dpr=self.ui.devicePixelRatio())
             pm.setDevicePixelRatio(2)
             self.imageResourceCache[img] = pm
         self.addImageResources()
@@ -345,6 +343,7 @@ class ProfileDetailsWidget(QtCore.QObject):
     def showProfileImages(self, d, isRefresh):
         self.imageHashes = self.model.getImageHashes(d)
         self.showImageLabels(len(self.imageHashes))
+        meta = d.get("takenOnGrindrMetadata")
         for i, imgHash in enumerate(self.imageHashes):
             imgFileName = get_cached_image_name(self._mediaDescription(imgHash))
             if imgFileName:
@@ -352,6 +351,15 @@ class ProfileDetailsWidget(QtCore.QObject):
             else:
                 self.ui.imageLabels[i].setPixmap(self.loadingProfileImage)
                 self.startBackgroundDownload(imgHash)
+            authentic, createdAt = True, ""
+            if meta and imgHash in meta:
+                authentic = meta[imgHash]["takenOnGrindr"]
+                createdAt = formatTimeStamp(meta[imgHash]["createdAt"])
+                self.ui.iconLabels[i].setToolTip(f"Taken on camera: {createdAt}" if authentic else f"Created at: {createdAt}")
+                self.ui.iconLabels[i].setPixmap(self.takenOnCameraIcon if authentic else self.notTakenOnCameraIcon)
+                self.ui.iconLabels[i].show()
+            else:
+                self.ui.iconLabels[i].hide()
         if not isRefresh:
             self.ui.imageScrollArea.ensureVisible(0, 0)
 

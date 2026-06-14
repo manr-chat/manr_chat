@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*'  # runs when you push a version tag like v1.0.0
+  release:
+    types: [created] # manually created release
 
 permissions:
   contents: write  # needed to create releases and upload assets
@@ -21,18 +23,24 @@ jobs:
 
       - name: Install dependencies
         run: |
+          python -m venv venv-build
+          venv-build\Scripts\activate
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
 
       - name: Build with PyInstaller
-        run: pyinstaller manr_pyinstaller.spec
+        run: |
+          venv-build\Scripts\activate
+          pyinstaller manr_pyinstaller.spec
 
       - name: Build installer with Inno Setup
         run: iscc manr_inno_setup.iss
 
-      - name: Create GitHub release and upload installer
+      - name: Upload or create Github release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          gh release view ${{ github.ref_name }} && \
+          gh release upload ${{ github.ref_name }} Manr_Chat_Setup*.exe || \
           gh release create ${{ github.ref_name }} Manr_Chat_Setup*.exe --title "${{ github.ref_name }}" --generate-notes

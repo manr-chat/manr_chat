@@ -54,7 +54,7 @@ GET_MY_PROFILE = "/v4/me/profile" # GET
 PROFILE_IMAGES = "/v3.1/me/profile/images?selected=false" # GET
 SET_PROFILE_IMAGES = "/v3/me/profile/images" # PUT with {"primaryImageHash": "id","secondaryImageHashes": ["id"]}
 
-RIGHTNOW_FEED = "/v3/rightnow/feed?sort=DISTANCE" # GET
+RIGHTNOW_FEED = "/v5/rightnow/feed?sort=DISTANCE" # GET
 
 # No idea what this does, telemetry or something useful
 ACK_NOTIFICATION = "/public/v1/notifications/ack" # POST with {"notificationId": "idstring", "source": "WEBSOCKET"}

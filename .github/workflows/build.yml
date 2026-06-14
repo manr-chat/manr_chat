@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'  # runs when you push a version tag like v1.0.0
 
+permissions:
+  contents: write  # needed to create releases and upload assets
+
 jobs:
   build:
     runs-on: windows-latest
@@ -28,7 +31,8 @@ jobs:
       - name: Build installer with Inno Setup
         run: iscc manr_inno_setup.iss
 
-      - name: Upload installer to release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: Manr_Chat_Setup*.exe
+      - name: Create GitHub release and upload installer
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ github.ref_name }} Manr_Chat_Setup*.exe --title "${{ github.ref_name }}" --generate-notes

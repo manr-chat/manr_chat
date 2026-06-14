@@ -12,6 +12,7 @@ sandbox
 scripts
 capture
 NOTES.txt
+*.exe
 
 # workspaces
 *.sublime-workspace

@@ -6,22 +6,9 @@ MANR (/ˈmɛnɐ/, from German word "Männer" for men) is an alternative chat cli
 
 ## Installation
 
-Manual installation steps:
+Download the latest installer for Windows from the [releases page](https://github.com/manr-chat/manr_chat/releases/latest).
 
-1) Download and install [Python](https://www.python.org/downloads/), if you do not have it installed already. (If you are already using Python and know what you're doing, you may want to create a virtual environment.)
-2) Download the contents of this repository with the "Download ZIP" option and unzip it to where you want to save the application.
-3) Install Python dependencies: Open a terminal window in the directory where you unzipped the application files and run the following command:
-```
-pip install -r requirements.txt
-```
-4) Run the application by starting `app.py`.
-5) Optionally: create a shortcut to `app.py` to quickly start it. There's an app icon you can use in `./manr/resources/img/icon.ico`.
-
-TODO: Installer / Release artifacts 
-
-### Uninstall
-
-Simply delete the application folder. Additionally, delete settings and caches in `%APPDATA%/manr` and `%LOCALAPPDATA%/manr`.
+Check the [manual installation instructions](CONTRIBUTING.md) for Linux or macOS.
 
 ## Usage
 
@@ -41,7 +28,7 @@ Choosing a location in the "My location" view actively sets your Grindr location
 
 ## Features
 
-MANR contains most commonly used basic chat functionality, but certain features are still missing. Some featured are important but rarely used and thus not implemented yet, some I consider unnecesary.
+MANR contains most commonly used basic chat functionality, but certain features are still missing. Some features are important but rarely used and thus not implemented yet, some I consider unnecesary.
 
 Features include:
 - Browse list of nearby user profiles, explore locations, and view "right now" profiles. "For You" profiles appear at the end of the nearby list.
@@ -63,6 +50,10 @@ Missing features:
 - Translations, including server provided translations for tags, genders, etc.
 - Some other minor fields in the user profile
 - "Explore locations" in the user grid. These are stupid anyway and won't be implemented.
+
+## Contributing & Development
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for instructions on setting up the development environment and contributing features.
 
 ## License
 

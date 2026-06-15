@@ -18,6 +18,7 @@ from .albumlistwidget import AlbumListWidget
 from .chatwidget import ChatWidget
 from .chatlistwidget import ChatListWidget
 from .detailsselectionwidget import DetailsSelectionWidget
+from .aboutdialog import showAboutDialog
 from .filterdialog import showFilterDialog
 from .locationdialog import showLocationDialog
 from .logindialog import showLoginDialog
@@ -70,6 +71,7 @@ class MainWindow:
         self.ui.actionLogin.triggered.connect(self.on_actionLogin_triggered)
         self.ui.actionAutoLogin.triggered.connect(self.on_actionAutoLogin_triggered)
         self.ui.actionClearLocationOnLogin.triggered.connect(self.on_actionClearLocationOnLogin_triggered)
+        self.ui.actionAbout.triggered.connect(self.on_actionAbout_triggered)
         self.pageSelector.ui.reloadProfiles.clicked.connect(self.on_reloadProfiles_clicked)
         self.pageSelector.ui.setFilter.clicked.connect(self.on_setFilter_clicked)
         self.pageSelector.ui.setLocation.clicked.connect(self.on_setLocation_clicked)
@@ -348,6 +350,9 @@ class MainWindow:
 
     def on_setRightNow_clicked(self):
         self.initRightNow()
+
+    def on_actionAbout_triggered(self):
+        showAboutDialog(self.ui)
 
     def on_setFilter_clicked(self):
         filter = showFilterDialog(self.model.getSearchFilter(), self.ui)

@@ -1,7 +1,13 @@
 import codecs
 
+def _version():
+    return "0.8.1"
+
 def version_str():
-    return "0.8b"
+    return f"{_version()}b"
+
+def display_version_str():
+    return f"{_version()} beta"
 
 def manr_app_name():
     return "manr_chat"

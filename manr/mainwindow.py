@@ -29,6 +29,7 @@ from .statusbarcontrol import StatusBarControl
 
 from .image_cache import *
 from .datamodel import DataModel
+from .updatechecker import UpdateChecker
 from .userdb import UserDB
 from .utils import profile
 if sys.platform == 'win32':
@@ -48,11 +49,13 @@ class MainWindow:
         self.ui = QUiLoader().load("mainwindow.ui")
         self.first_log_message = True
         self.notificationPlayer = None
+        self.update_checker = UpdateChecker()
         self.buildWidgets()
         self.setupActionGroups()
         self.loadSettings()
         self.setupConnections()
         self.sessionTimer = None
+        self.update_checker.check()
 
     def init(self):
         self.tryAutoLogin()
@@ -83,6 +86,8 @@ class MainWindow:
         self.websocket.signals.received.connect(self.on_websocket_received)
         self.websocket.signals.error.connect(self.on_websocket_error)
         self.websocket.signals.closed.connect(self.on_websocket_closed)
+        # Updates
+        self.update_checker.update_available.connect(self.show_update_message)
 
     def buildWidgets(self):
         self.profileList = ProfileListWidget(self.model)
@@ -196,6 +201,28 @@ class MainWindow:
             self.model.setKnownImageHashes(load_json(filename))
         except:
             pass
+
+    def show_update_message(self, version, url):
+        skipped_version = self.settings.value("update/skipped_version", "")
+        if skipped_version == version:
+            return
+
+        msg = QtWidgets.QMessageBox(self.ui)
+        msg.setWindowTitle("Update Available")
+        msg.setText(f"Version {version} is available.\n\nOpen download page?")
+        open_button = msg.addButton("Open", QtWidgets.QMessageBox.ButtonRole.AcceptRole)
+        later_button = msg.addButton("Later", QtWidgets.QMessageBox.ButtonRole.RejectRole)
+        skip_button = msg.addButton("Skip this version", QtWidgets.QMessageBox.ButtonRole.RejectRole)
+
+        msg.exec()
+        clicked = msg.clickedButton()
+        if clicked == skip_button:
+            self.settings.setValue("update/skipped_version", version)
+        else:
+            self.settings.setValue("update/skipped_version", "")
+        if clicked == open_button:
+            import webbrowser
+            webbrowser.open(url)
 
     def saveKnownImageHashes(self):
         filename = str(get_config_dir() / "known_image_hashes.json")

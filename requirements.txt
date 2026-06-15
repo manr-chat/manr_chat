@@ -6,3 +6,4 @@ websockets>=15.0.1
 geopy>=2.4.1
 pip_system_certs>=5.3
 curl_cffi>=0.15.0
+packaging>=25.0

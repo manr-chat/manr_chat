@@ -15,7 +15,7 @@ class AboutDialog(QtCore.QObject):
         self.ui = QUiLoader().load("aboutdialog.ui", parent)
         email = manr_email_address()
         self.ui.labelVersion.setText(display_version_str())
-        self.ui.labelEmail.setText(f'<a href="{email}">{email}</a>')
+        self.ui.labelEmail.setText(f'<a href="mailto:{email}">{email}</a>')
         dpr = self.ui.devicePixelRatio()
         if dpr > 1.5:
             pm = QtGui.QPixmap("resources/img/icon_128.png")

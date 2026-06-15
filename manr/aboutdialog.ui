@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
+ <class>AboutDialog</class>
  <widget class="QDialog" name="AboutDialog">
   <property name="geometry">
    <rect>
@@ -138,17 +138,17 @@
  <connections>
   <connection>
    <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
-   <slot>reject()</slot>
+   <signal>clicked(QAbstractButton*)</signal>
+   <receiver>AboutDialog</receiver>
+   <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>334</x>
-     <y>247</y>
+     <x>463</x>
+     <y>243</y>
     </hint>
     <hint type="destinationlabel">
-     <x>286</x>
-     <y>253</y>
+     <x>298</x>
+     <y>211</y>
     </hint>
    </hints>
   </connection>

@@ -19,6 +19,7 @@ from .chatwidget import ChatWidget
 from .chatlistwidget import ChatListWidget
 from .detailsselectionwidget import DetailsSelectionWidget
 from .aboutdialog import showAboutDialog
+from .editprofiledialog import showEditProfileDialog
 from .filterdialog import showFilterDialog
 from .locationdialog import showLocationDialog
 from .logindialog import showLoginDialog
@@ -75,6 +76,7 @@ class MainWindow:
         self.ui.actionAutoLogin.triggered.connect(self.on_actionAutoLogin_triggered)
         self.ui.actionClearLocationOnLogin.triggered.connect(self.on_actionClearLocationOnLogin_triggered)
         self.ui.actionAbout.triggered.connect(self.on_actionAbout_triggered)
+        self.ui.actionEditProfile.triggered.connect(self.on_actionEditProfile_triggered)
         self.pageSelector.ui.reloadProfiles.clicked.connect(self.on_reloadProfiles_clicked)
         self.pageSelector.ui.setFilter.clicked.connect(self.on_setFilter_clicked)
         self.pageSelector.ui.setLocation.clicked.connect(self.on_setLocation_clicked)
@@ -380,6 +382,16 @@ class MainWindow:
 
     def on_actionAbout_triggered(self):
         showAboutDialog(self.ui)
+
+    def on_actionEditProfile_triggered(self):
+        if not self.model.user or self.model.offlineMode:
+            return
+        profile = self.model.getMyProfile()
+        if not profile:
+            QtWidgets.QMessageBox.warning(self.ui, self.ui.windowTitle(),
+                                          "Error: could not retrieve profile information.")
+            return
+        showEditProfileDialog(profile, self.ui)
 
     def on_setFilter_clicked(self):
         filter = showFilterDialog(self.model.getSearchFilter(), self.ui)

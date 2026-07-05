@@ -47,6 +47,8 @@
     <addaction name="actionClearLocationOnLogin"/>
     <addaction name="separator"/>
     <addaction name="menuLoginAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionEditProfile"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -116,6 +118,11 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionEditProfile">
+   <property name="text">
+    <string>Edit Profile ...</string>
    </property>
   </action>
  </widget>

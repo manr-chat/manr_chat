@@ -2,7 +2,8 @@ from .generic_request import generic_post, generic_get, generic_put, generic_del
 from .paths import (SESSIONS, TAP, GET_USERS, TAPS_RECEIVED, TAPS_SENT, GET_PROFILE,
                     GET_PROFILES, STATUS, ALBUM, ALBUM_SHARES, FAVORITES, FAVORITES_LIST,
                     VIEWS, INBOX, CONVERSATIONS, DEL_CONVERSATION, REACT_MSG, MESSAGE_READ,
-                    MEDIA_DRAWER, MEDIA_UPLOAD, BLOCKING, BLOCK, HIDDEN, HIDE, UNHIDE, RIGHTNOW_FEED)
+                    MEDIA_DRAWER, MEDIA_UPLOAD, BLOCKING, BLOCK, HIDDEN, HIDE, UNHIDE, RIGHTNOW_FEED,
+                    GET_MY_PROFILE, SET_MY_PROFILE)
 from .utils import to_geohash
 
 class GrindrFlags:
@@ -89,6 +90,10 @@ class GrindrUser(GrindrUserBase):
         }
         params.update(filter)
         response = generic_get(GET_USERS, params, self.deviceInfo, auth_token=self.sessionId, debug=debug)
+        return response
+
+    def get_my_profile(self, debug=False):
+        response = generic_get(GET_MY_PROFILE, {}, self.deviceInfo, auth_token=self.sessionId, debug=debug)
         return response
 
     def get_right_now(self, debug=False):

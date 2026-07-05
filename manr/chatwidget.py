@@ -334,7 +334,7 @@ class ImagePopup(QDialog):
     def __init__(self, pixmap, imgName, parent):
         super().__init__(parent)
         self.setWindowTitle("Chat image [ESC to close]")
-        if imgName and imgName.endswith(".gif"):
+        if imgName and (imgName.endswith(".gif") or imgName.endswith(".webp")):
             curDir = os.getcwd()
             file = str(Path(curDir) / imgName)
             file = QtCore.QUrl.fromLocalFile(file).toString()

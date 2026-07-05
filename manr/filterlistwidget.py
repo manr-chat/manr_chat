@@ -38,11 +38,3 @@ class FilterListWidget(QtCore.QObject):
 
     def get(self):
        return self.isEnabled(), self.getValues()
-
-    def on_minValue_valueChanged(self, value):
-        if value > self.ui.maxValue.value():
-            self.ui.maxValue.setValue(value)
-
-    def on_maxValue_valueChanged(self, value):
-        if value < self.ui.minValue.value():
-            self.ui.minValue.setValue(value)

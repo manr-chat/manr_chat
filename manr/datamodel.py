@@ -584,3 +584,9 @@ class DataModel:
 
     def unhideAllUsers(self):
         self.user.unhide_all_users()
+
+    def getMyProfile(self):
+        profile = self.user.get_my_profile()
+        if "profiles" in profile:
+            return profile["profiles"][0]
+        return None

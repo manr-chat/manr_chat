@@ -50,7 +50,7 @@ MESSAGE_READ = "/v4/chat/conversation/{convId}/read/{msgId}" # POST
 MEDIA_UPLOAD  = "/v5/chat/media/upload?takenOnGrindr={takenOnGrindr}" # POST with image data, content-type: image/jpeg
 SPOTIFY_FAVORITES = "/v4/spotify/favorites/{profileId}" # GET
 SET_MY_PROFILE = "/v3.1/me/profile" # PUT with profile data
-GET_MY_PROFILE = "/v4/me/profile" # GET
+GET_MY_PROFILE = "/v5/me/profile" # GET
 PROFILE_IMAGES = "/v3.1/me/profile/images?selected=false" # GET
 SET_PROFILE_IMAGES = "/v3/me/profile/images" # PUT with {"primaryImageHash": "id","secondaryImageHashes": ["id"]}
 

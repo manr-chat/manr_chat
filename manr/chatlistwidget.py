@@ -141,8 +141,12 @@ class ChatListWidget(QtCore.QObject):
             text = "gaymoji: " + chatBody["url"]
         elif chatType == "Album":
             text = f"Album: {chatBody["albumId"]}"
+        elif chatType == "ExpiringAlbum" or chatType == "ExpiringAlbumV2":
+            text = f"Expiring Album: {chatBody["albumId"]}"
         elif chatType == "Location":
             text = f"📍🗺️ Location"
+        elif chatType == "VideoCall":
+            text = f"📹 Video Call"
         elif chatType == "ProfilePhotoReply":
             text = f"Profile photo reply: " + chatBody["imageHash"]
         else:

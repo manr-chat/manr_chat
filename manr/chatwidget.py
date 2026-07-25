@@ -29,7 +29,7 @@ from .gaymojiselectiondialog import showGaymojiSelectionDialog
 from .utils import formatTimeStamp
 
 Sender = Enum("Sender", ["sent", "received"])
-MsgType = Enum("MsgType", ["text", "image", "album", "location"])
+MsgType = Enum("MsgType", ["text", "image", "album", "location", "videocall"])
 
 ReactionType = Enum("ReactionType", ["single", "multi"])
 
@@ -131,11 +131,17 @@ class ChatDelegate(QStyledItemDelegate):
                 return self.REPLY_IMG_HEIGHT + 2 * self.REPLY_RADIUS
         return 0
 
+    def _msg_display_as_text(self, msg: ChatMessage):
+        return msg.msgType == MsgType.text or msg.msgType == MsgType.location or msg.msgType == MsgType.videocall
+
+    def _msg_display_as_image(self, msg: ChatMessage):
+        return msg.msgType == MsgType.image or msg.msgType == MsgType.album
+
     def _compute_content_size(self, msg: ChatMessage, option, index):
         content_size = QSize(50, 50)
         max_bubble_width = option.widget.width() * self.WIDTH_RATIO
         doc = None
-        if msg.msgType == MsgType.text or msg.msgType == MsgType.location:
+        if self._msg_display_as_text(msg):
             # timestamp width
             fm = QFontMetrics(option.font)
             timestamp_width = fm.horizontalAdvance(msg.timestamp)
@@ -144,8 +150,10 @@ class ChatDelegate(QStyledItemDelegate):
             doc = QTextDocument()
             if msg.msgType == MsgType.text:
                 text = cast(str, msg.content)
-            else:
+            elif msg.msgType == MsgType.location:
                 text = f"📍🗺️ <b>Location:</b><br>Lat {msg.content["lat"]}, Lon {msg.content["lon"]}"
+            else:
+                text = f"📹 <b>Video Call:</b><br>{msg.content["result"]}"
             doc.setHtml(text)
             # First set the maximum width as a constraint
             doc.setTextWidth(max_bubble_width)
@@ -155,7 +163,7 @@ class ChatDelegate(QStyledItemDelegate):
             # Now re-set the actual width so the height computation is correct
             doc.setTextWidth(actual_width)
             content_size = doc.size().toSize()
-        elif msg.msgType == MsgType.image or msg.msgType == MsgType.album:
+        elif self._msg_display_as_image(msg):
             pixmap = cast(tuple[QPixmap, str], msg.content)[0]
             if pixmap and not pixmap.isNull():
                 scale = min(1.0, max_bubble_width / pixmap.width())
@@ -218,11 +226,11 @@ class ChatDelegate(QStyledItemDelegate):
 
         # Draw content
         reply_offset = self._compute_reply_height(msg.replyMsg)
-        if msg.msgType == MsgType.text or msg.msgType == MsgType.location:
+        if self._msg_display_as_text(msg):
             painter.translate(bubble_rect.left() + self.PADDING, bubble_rect.top() + self.PADDING + reply_offset)
             doc.drawContents(painter)
             painter.translate(-bubble_rect.left() - self.PADDING, -bubble_rect.top() - self.PADDING - reply_offset)
-        elif msg.msgType == MsgType.image or msg.msgType == MsgType.album:
+        elif self._msg_display_as_image(msg):
             pixmap = cast(tuple[QPixmap, str], msg.content)[0]
             if pixmap and not pixmap.isNull():
                 scale = min(1.0, max_bubble_width / pixmap.width())
@@ -527,7 +535,7 @@ class ChatWidget(QObject):
                 msg, msgType = imgMsg(body["imageHash"], MediaType.gaymoji)
             case "Giphy":
                 msg, msgType = imgMsg(body["imageHash"], MediaType.url, url=body["urlPath"])
-            case "Album":
+            case "Album" | "ExpiringAlbum" | "ExpiringAlbumV2":
                 coverUrl = body["coverUrl"]
                 imgHash = decorated_hash_from_url(coverUrl)
                 msg, msgType = imgMsg(imgHash, MediaType.url, url=coverUrl)
@@ -535,6 +543,8 @@ class ChatWidget(QObject):
                     msgType = MsgType.album
             case "Location":
                 msg, msgType = body, MsgType.location
+            case "VideoCall":
+                msg, msgType = body, MsgType.videocall
             case "ProfilePhotoReply":
                 photoContentReply = escape(body["photoContentReply"]).replace("\n", "<br>")
                 msg = f"<b>Profile photo reply:</b><br>{photoContentReply}"

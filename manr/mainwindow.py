@@ -651,6 +651,10 @@ class MainWindow:
             self.initReceivedTaps()
             self.statusBar.tapNotification(tap["senderId"], tap["tapType"], tap["senderProfileImageHash"])
             self.setCounterLabels()
+        elif msg["type"] == "videocall.v1.incoming_call":
+            payload = msg["payload"]
+            self.statusBar.videoCallNotification(payload["senderId"])
+
 
     def on_websocket_error(self, error_tuple):
         exctype, value, traceback = error_tuple

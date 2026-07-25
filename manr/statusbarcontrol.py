@@ -28,6 +28,7 @@ class StatusBarControl:
         self.chatIcon = self._loadPixmap("resources/img/incoming_envelope.svg")
         self.albumIcon = self._loadPixmap("resources/img/frame_with_picture.svg")
         self.viewIcon = "👀"
+        self.videoCallIcon = "📹"
         self.tapHiIcon = self._loadPixmap("resources/img/friendly.svg")
         self.tapHotIcon = self._loadPixmap("resources/img/hot.svg")
         self.tapLookingIcon = self._loadPixmap("resources/img/looking.svg")
@@ -69,15 +70,17 @@ class StatusBarControl:
         self._alert()
         if not self.model.user or int(senderId) != int(self.model.user.profileId):
             icon = self.chatIcon if chatType != "Album" else self.albumIcon
-            profile = self.model.getProfileDetails(senderId)
-            imgHashes = self.model.getImageHashes(profile)
-            imgHash = imgHashes[0] if imgHashes else None
+            imgHash = self._imgHashFromProfileId(senderId)
             text = body["text"] if chatType == "Text" else None
             self._addNotificationIcon(icon, imgHash, text)
 
     def viewNotification(self, profileId, imgHash):
         self._alert(duration=30)
         self._addNotificationIcon(self.viewIcon, imgHash)
+
+    def videoCallNotification(self, senderId):
+        imgHash = self._imgHashFromProfileId(senderId)
+        self._addNotificationIcon(self.videoCallIcon, imgHash)
 
     def tapNotification(self, senderId, tapType, imgHash):
         self._alert()
@@ -92,6 +95,12 @@ class StatusBarControl:
         else :
             icon = self.tapHotIcon
         self._addNotificationIcon(icon, imgHash)
+
+    def _imgHashFromProfileId(self, profileId):
+        profile = self.model.getProfileDetails(profileId)
+        imgHashes = self.model.getImageHashes(profile)
+        imgHash = imgHashes[0] if imgHashes else None
+        return imgHash
 
     def _getNextLabels(self):
         if len(self.notificationLabels) >= maxNotificationLabels:

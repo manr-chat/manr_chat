@@ -348,6 +348,7 @@ class DataModel:
         if convId not in self.conversationCache:
             self.conversationCache[convId] = conv
             return
+        self.conversationCache[convId]["lastReadTimestamp"] = conv["lastReadTimestamp"]
         cconv = self.conversationCache[convId]['messages']
         for m in conv['messages']:
             for i, cm in enumerate(cconv):
@@ -388,7 +389,8 @@ class DataModel:
             pageKey = convPage["messages"][-1]["messageId"]
         if conv:
             self._updateConversationCache(convId, conv)
-        return self.conversationCache[convId]
+        res = self.conversationCache[convId]
+        return res
 
     def _getCachedChatMessage(self, convId, msgId):
         if convId not in self.conversationCache:

@@ -498,7 +498,7 @@ class ChatWidget(QObject):
         enabled = bool(self.chatProfileId) and not self.model.offlineMode
         self.ui.chatLine.setEnabled(enabled)
 
-    def _parseMessage(self, m):
+    def _parseMessage(self, m, lastRead):
         def imgMsg(*args, **kwargs):
             imgDesc = MediaDescription(*args, **kwargs)
             print("MediaDescription:", imgDesc)
@@ -558,6 +558,11 @@ class ChatWidget(QObject):
         else:
             sender = Sender.received
         timeStamp = formatTimeStamp(m["timestamp"])
+        if sender == Sender.sent and m["timestamp"] and lastRead:
+            if m["timestamp"] <= lastRead:
+                timeStamp = "Read, " + timeStamp
+            else:
+                timeStamp = "UNREAD, " + timeStamp
         reaction = None
         for r in m.get("reactions", []):
             if "profileId" in r and "reactionType" in r:
@@ -567,14 +572,15 @@ class ChatWidget(QObject):
             if not reaction:
                 print("Unknown reaction to message:", r)
         if m["replyToMessage"]:
-            replyTo = self._parseMessage(m["replyToMessage"])
+            replyTo = self._parseMessage(m["replyToMessage"], lastRead)
         return ChatMessage(msgType, msg, sender, timeStamp, reaction, replyTo, mId)
 
 
     def addChats(self, chat):
         sortedMessages = sorted(chat["messages"], key=lambda m: m["timestamp"])
+        lastRead = chat["lastReadTimestamp"]
         for m in sortedMessages:
-            message = self._parseMessage(m)
+            message = self._parseMessage(m, lastRead)
             self.chatModel.add_message(message)
         # FIXME: only mark as read when chat widget is actually visible!
         self.markAsRead(chat, sortedMessages)

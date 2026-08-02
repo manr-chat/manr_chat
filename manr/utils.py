@@ -103,6 +103,19 @@ def formatTimeStamp(t):
         return f"{difftext} ago ({date})"
     return date
 
+def sort_dict(d):
+    return {k: d[k] for k in sorted(d.keys())}
+
+def loadMappings():
+    mappings = load_json("resources/data/mapping.json")
+    genders = load_json("resources/data/genders.json")
+    pronouns = load_json("resources/data/pronouns.json")
+    for g in genders:
+        mappings["genders"][str(g["genderId"])] = g["gender"]
+    for p in pronouns:
+        mappings["pronouns"][str(p["pronounId"])] = p["pronoun"]
+    mappings["pronouns"] = sort_dict(mappings["pronouns"])
+    return mappings
 
 def getCroppedSquare(rect):
     w, h = rect.width(), rect.height()

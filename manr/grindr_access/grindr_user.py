@@ -96,6 +96,10 @@ class GrindrUser(GrindrUserBase):
         response = generic_get(GET_MY_PROFILE, {}, self.deviceInfo, auth_token=self.sessionId, debug=debug)
         return response
 
+    def set_my_profile(self, profile, debug=True):
+        response = generic_put(SET_MY_PROFILE, profile, self.deviceInfo, auth_token=self.sessionId, debug=debug)
+        return response
+
     def get_right_now(self, debug=False):
         response = generic_get(RIGHTNOW_FEED, {}, self.deviceInfo, auth_token=self.sessionId, debug=debug)
         return response

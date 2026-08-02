@@ -29,7 +29,7 @@ class ProfileDetailsWidget(QtCore.QObject):
         dpr = self.ui.devicePixelRatio()
         self.takenOnCameraIcon = loadSvgForSize("resources/img/taken_on_camera.svg", dpr=dpr)
         self.notTakenOnCameraIcon = loadSvgForSize("resources/img/not_taken_on_camera.svg", dpr=dpr)
-        self.loadMappings()
+        self.mappings = loadMappings()
         self.loadImageResources()
         self.loadLogo()
 
@@ -51,15 +51,6 @@ class ProfileDetailsWidget(QtCore.QObject):
         menu.addActions([actTapHi, actTapHot, actTapLooking])
         self.ui.sendTap.setMenu(menu)
         self.ui.sendTap.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.MenuButtonPopup)
-
-    def loadMappings(self):
-        self.mappings = load_json("resources/data/mapping.json")
-        genders = load_json("resources/data/genders.json")
-        pronouns = load_json("resources/data/pronouns.json")
-        for g in genders:
-            self.mappings["genders"][str(g["genderId"])] = g["gender"]
-        for p in pronouns:
-            self.mappings["pronouns"][str(p["pronounId"])] = p["pronoun"]
 
     def initImageLabels(self, count):
         for i in range(count - len(self.ui.imageLabels)):
@@ -348,6 +339,7 @@ class ProfileDetailsWidget(QtCore.QObject):
             imgFileName = get_cached_image_name(self._mediaDescription(imgHash))
             if imgFileName:
                 self.ui.imageLabels[i].setPixmap(QtGui.QPixmap(imgFileName))
+                print(f"Profile image {i}: {imgFileName}")
             else:
                 self.ui.imageLabels[i].setPixmap(self.loadingProfileImage)
                 self.startBackgroundDownload(imgHash)

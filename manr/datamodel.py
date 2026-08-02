@@ -168,6 +168,8 @@ class DataModel:
         return result
 
     def setProfileForImageHash(self, profileId, imgHash):
+        if not imgHash:
+            return
         profileId = int(profileId)
         if imgHash in self.knownImageHashes:
             assert self.knownImageHashes[imgHash] == profileId
@@ -592,3 +594,6 @@ class DataModel:
         if "profiles" in profile:
             return profile["profiles"][0]
         return None
+
+    def setMyProfile(self, profile):
+        return self.user.set_my_profile(profile)

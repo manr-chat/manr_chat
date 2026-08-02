@@ -391,7 +391,7 @@ class MainWindow:
             QtWidgets.QMessageBox.warning(self.ui, self.ui.windowTitle(),
                                           "Error: could not retrieve profile information.")
             return
-        showEditProfileDialog(profile, self.ui)
+        showEditProfileDialog(self.model, profile, self.ui)
 
     def on_setFilter_clicked(self):
         filter = showFilterDialog(self.model.getSearchFilter(), self.ui)

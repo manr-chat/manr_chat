@@ -1,7 +1,7 @@
 import codecs
 
 def _version():
-    return "0.8.1"
+    return "0.9.0"
 
 def version_str():
     return f"{_version()}b"

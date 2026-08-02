@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "Manr Chat"
-#define MyAppVersion "0.8-beta"
+#define MyAppVersion "0.9-beta"
 #define MyAppPublisher "Manr"
 #define MyAppURL "https://codeberg.org/manr/manr_chat"
 #define MyAppExeName "manr.exe"

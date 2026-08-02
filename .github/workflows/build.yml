@@ -7,6 +7,10 @@ on:
   release:
     types: [created] # manually created release
 
+concurrency:
+  group: build-${{ github.ref_name }}
+  cancel-in-progress: true
+
 permissions:
   contents: write  # needed to create releases and upload assets
 
@@ -41,6 +45,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release view ${{ github.ref_name }} && \
-          gh release upload ${{ github.ref_name }} Manr_Chat_Setup*.exe || \
-          gh release create ${{ github.ref_name }} Manr_Chat_Setup*.exe --title "${{ github.ref_name }}" --generate-notes
+          gh release view ${{ github.ref_name }} && gh release upload ${{ github.ref_name }} Manr_Chat_Setup*.exe || gh release create ${{ github.ref_name }} Manr_Chat_Setup*.exe --title "${{ github.ref_name }}" --generate-notes

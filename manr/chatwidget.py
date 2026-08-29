@@ -392,6 +392,8 @@ class ChatWidget(QObject):
         self.chatProfileId = None
         self.refreshScheduled = False
         self.replyToMsg = None
+        self.isTabVisible = False
+        self.delayedMarkAsReadMsg = None
         self.clearReply()
         #self.ui.replySenderColor.setProperty("sender", "sent")
 
@@ -404,6 +406,11 @@ class ChatWidget(QObject):
         # Resize triggers layout recalculation
         self.ui.chatView.resizeEvent = self._on_chat_view_resize
         self.ui.chatView.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+
+    def setTabVisible(self, visible):
+        self.isTabVisible = visible
+        if visible:
+            self._delayedMarkAsRead()
 
     def setupConnections(self):
         self.ui.sendMessage.clicked.connect(self.on_sendMessage_clicked)
@@ -582,10 +589,20 @@ class ChatWidget(QObject):
         for m in sortedMessages:
             message = self._parseMessage(m, lastRead)
             self.chatModel.add_message(message)
-        # FIXME: only mark as read when chat widget is actually visible!
-        self.markAsRead(chat, sortedMessages)
+        self._maybeMarkAsRead(chat, sortedMessages)
 
-    def markAsRead(self, chat, messages):
+    def _markAsRead(self, msg):
+        if not msg:
+            return
+        convId = msg["conversationId"]
+        msgId = msg["messageId"]
+        self.model.markMessageRead(convId=convId, msgId=msgId)
+
+    def _delayedMarkAsRead(self):
+        self._markAsRead(self.delayedMarkAsReadMsg)
+        self.delayedMarkAsReadMsg = None
+
+    def _maybeMarkAsRead(self, chat, messages):
         if not messages:
             return
         lastMsg = messages[-1]
@@ -597,9 +614,10 @@ class ChatWidget(QObject):
         #lastRead = chat.get("lastReadTimestamp", None)
         #if lastRead and lastMsgTs and lastRead >= lastMsgTs:
         #    return
-        convId = lastMsg["conversationId"]
-        msgId = lastMsg["messageId"]
-        self.model.markMessageRead(convId=convId, msgId=msgId)
+        if self.isTabVisible:
+            self._markAsRead(lastMsg)
+        else:
+            self.delayedMarkAsReadMsg = lastMsg
 
     def displayChat(self, profileId, update=False):
         self.chatModel.clear()

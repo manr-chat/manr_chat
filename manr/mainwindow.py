@@ -82,6 +82,7 @@ class MainWindow:
         self.pageSelector.ui.setLocation.clicked.connect(self.on_setLocation_clicked)
         self.pageSelector.ui.setExploreLocation.clicked.connect(self.on_setExploreLocation_clicked)
         self.pageSelector.ui.setRightNow.clicked.connect(self.on_setRightNow_clicked)
+        self.detailsSelector.ui.tabWidget.currentChanged.connect(self.on_detailsSelector_currentChanged)
         self.model.signals.tapSent.connect(self.on_model_tapSent)
         self.model.signals.messageRead.connect(self.on_model_messageRead)
         # Websocket
@@ -590,6 +591,11 @@ class MainWindow:
 
     def on_tapsSentList_currentChanged(self, curIdx, prevIdx):
         self.onProfileListSelected(self.tapsSentList, curIdx)
+
+    def on_detailsSelector_currentChanged(self, curIdx):
+        ui = self.detailsSelector.ui
+        chatVisible = ui.tabWidget.currentWidget() == ui.tabChat
+        self.chatWidget.setTabVisible(chatVisible)
 
     def displayProfile(self, profileId, albumId=None):
         if profileId:

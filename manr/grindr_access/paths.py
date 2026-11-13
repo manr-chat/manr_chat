@@ -3,7 +3,7 @@
 SESSIONS = "/v5/sessions"
 SESSIONS = "/v8/sessions"  # with geohash
 #GET_USERS = "/v1/cascade"
-GET_USERS = "/v3/cascade"
+GET_USERS = "/v4/cascade"
 #GET_PROFILE = "/v4/profiles/"
 #GET_PROFILE = "/v6/profiles/"
 GET_PROFILE = "/v7/profiles/"

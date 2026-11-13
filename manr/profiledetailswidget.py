@@ -159,7 +159,7 @@ class ProfileDetailsWidget(QtCore.QObject):
                 field = field[0]
             if text and field in self.mappings:
                 text = self.mappings[field].get(str(text), text)
-            return text
+            return str(text)
         def getMapped(field, mappingField=None):
             return mapField(get(field, None), mappingField or field)
         def getMappedList(field, mappingField=None):

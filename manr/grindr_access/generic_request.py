@@ -5,7 +5,7 @@ import json
 import zlib
 from .utils import gen_l_dev_info
 
-user_agent = "grindr3/26.15.1.174557;174557;Free;Android 13;Pixel 2;Google"
+user_agent = "grindr3/26.24.0.195444;195444;Free;Android 13;Pixel 2;Google"
 user_agent_header = "user-agent: " + user_agent
 cookie_file = ""
 

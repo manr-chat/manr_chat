@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 
 import sys
+# Workaround for bug with lazy imports
+sys.set_lazy_imports_filter(
+    lambda importing, imported, fromlist:
+        imported != "concurrent.futures"
+        and not imported.startswith("concurrent.futures.")
+)
+
 import signal
 import json
 import logging

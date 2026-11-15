@@ -194,6 +194,8 @@ class DataModel:
                 img_hashes.append(m["data"]["thumbnailUrl"])
             if "data" in m and "fullImageUrl" in m["data"]:
                 img_hashes.append(m["data"]["fullImageUrl"])
+        if "primaryImageUrl" in d:
+            img_hashes.append(d["primaryImageUrl"])
         if "rightNowFullImageUrl" in d:
             img_hashes.append(d["rightNowFullImageUrl"])
         img_hashes = [hash_from_str(s) for s in img_hashes]
